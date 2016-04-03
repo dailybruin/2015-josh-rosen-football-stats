@@ -1,0 +1,31 @@
+#passScrollbarContainer {
+	border-radius: 10px;
+	border: 2px solid grey;
+	width: 600px;
+	height: 600px;
+	
+	margin-left: 5%;
+	margin-top: 5%;
+}
+
+#passScrollbarTitle	{
+	width: 100%;
+	height: 5%;
+	margin: auto;
+	
+	text-align: center;
+	vertical-align: middle;
+	font-size: 24px;
+	line-height: 5%; 
+}
+
+#passScrollbar {
+	overflow: auto;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	
+	width: 98%;
+	height: 90%;
+	margin-top:0%;
+	margin-left: 1%;
+}
