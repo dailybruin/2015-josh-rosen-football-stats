@@ -49,6 +49,19 @@
 
 }
 
+/*#diagramContainer {
+    padding: 20px;
+    width:80%; height: 200px;
+    border: 1px solid gray;
+}*/
+        
+.item {
+    height:.8vw;
+    width: .8vw;
+    border: 1px solid blue;
+    float: left;
+}
+
 </style>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -56,7 +69,8 @@
 <body>
 
 <div class="flex-container">
-	
+	<div id="bob" class="item"></div>
+	<div id="fred" style="margin-left:50px;"></div>
 	<div class="flex-item">1</div>
 	<div class="flex-item">2</div>
 	<div class="flex-item">3</div>
@@ -2723,8 +2737,9 @@
 </div>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
 <script type="text/javascript" language="javascript" src="game-data/virginia.json"></script>
+<script src="js/jsPlumb-2.0.7-min.js"></script>
 <script type="text/javascript" language="javascript" src="js/passScrollbar.js"></script>
-<script src="jsPlumb-2.0.7-min.js"></script>
+
 
 </body>
 </html>
