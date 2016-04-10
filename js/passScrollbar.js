@@ -26,10 +26,10 @@ $(document).ready(function() {
 		
 
 		// Create divs for start and end point nodes
-		xstart = (xstart + 1) * .8;
-		xend = (xend + 1) * .8;
-		ystart = (ystart + 1) * 0.8;
-		yend = (yend + 1) * 0.8;
+		xstart = xstart * .8;
+		xend = xend * .8;
+		ystart = ystart * 0.8;
+		yend = yend * 0.8;
 
 		$(".flex-container").append("<p id=\"end" + i + "\" style=\"color:rgb(255, 0, 0); position:absolute; z-index:10; top:" + yend + "vw; left:" + xend + "vw;\">X</p>");
 		$(".flex-container").append("<p id=\"start" + i + "\" style=\"color:rgb(0, 255, 0); position:absolute; z-index:10; top:" + ystart + "vw; left:" + xstart + "vw;\">$</p>");
