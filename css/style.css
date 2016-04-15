@@ -1,9 +1,10 @@
 #passScrollbarContainer {
-	border-radius: 10px;
-	border: 2px solid grey;
+	border: 2px solid black;
 	width: 600px;
 	height: 600px;
-	
+	font-family: "Exo";
+	background-color: #007DC3;
+
 	margin-left: 5%;
 	margin-top: 5%;
 }
@@ -23,9 +24,10 @@
 	overflow: auto;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
+	background-color: #000;
+	color: #FFF;
 	
-	width: 98%;
-	height: 90%;
-	margin-top:0%;
-	margin-left: 1%;
+	width: 99%;
+	height: 91%;
+	padding-left: 1%;
 }
