@@ -39,7 +39,6 @@ $('#filter').click(function() {
 	var scrollbar = $("#passScrollbar");
 	
 	$('.pass').each(function(i, obj) {
-		
 		$(obj).show();
 		
 		//check downs
@@ -53,13 +52,6 @@ $('#filter').click(function() {
 		if (!quarterFilter.is(':checked')) {
 			$(obj).hide();
 		}
-		
-		
-		
 	});
-	
-	
-	
-	
 	
 });
