@@ -1,4 +1,4 @@
-Pass No.,Qtr.,Time,Down,Distance,Territory,Yard line,Ball pos.,Play type,Result of pass,Extraneous Incompletions,Receiver,Yards,YAC,Play notes,X-axis,Y-axis,X-axis,Y-axis
+Pass No.,Qtr.,Time,Down,Distance,Territory,Yard line,Ball pos.,Play type,Result of pass,Extraneous Incompletions,Receiver,Yards,YAC,Play notes,Pass X,Pass Y,Receive X ,Receive Y
 1,1,9:06,1,10,UCLA,25,L. hash,PA Pass,Incomplete,Drop,Kenny Walker,0,0,Dropped by Kenny Walker; perfect pass by Rosen,21,-7,14,48
 2,1,8:23,3,8,UCLA,27,L. hash,Pass,Complete,,Nate Iese,6,6,Check down to Iese,21,-8,35,-3
 3,1,4:55,2,12,UCLA,42,L. hash,Pass,Complete,,Paul Perkins,4,4,Check down to Perkins,20,-7,6,-4

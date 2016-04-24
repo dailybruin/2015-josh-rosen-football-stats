@@ -15,8 +15,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Dropped by Kenny Walker; perfect pass by Rosen",
-    "X-axis": 14,
-    "Y-axis": 48
+    "Pass X": 21,
+    "Pass Y": -7,
+    "Receive X": 14,
+    "Receive Y": 48
   },
   {
     "Pass No.": 2,
@@ -34,8 +36,10 @@ virginia = [
     "Yards": 6,
     "YAC": 6,
     "Play notes": "Check down to Iese",
-    "X-axis": 35,
-    "Y-axis": -3
+    "Pass X": 21,
+    "Pass Y": -8,
+    "Receive X": 35,
+    "Receive Y": -3
   },
   {
     "Pass No.": 3,
@@ -53,8 +57,10 @@ virginia = [
     "Yards": 4,
     "YAC": 4,
     "Play notes": "Check down to Perkins",
-    "X-axis": 6,
-    "Y-axis": -4
+    "Pass X": 20,
+    "Pass Y": -7,
+    "Receive X": 6,
+    "Receive Y": -4
   },
   {
     "Pass No.": 4,
@@ -72,8 +78,10 @@ virginia = [
     "Yards": 30,
     "YAC": 30,
     "Play notes": "HB screen to Perkins",
-    "X-axis": 17,
-    "Y-axis": -2
+    "Pass X": 20,
+    "Pass Y": -10,
+    "Receive X": 17,
+    "Receive Y": -2
   },
   {
     "Pass No.": 5,
@@ -91,8 +99,10 @@ virginia = [
     "Yards": 5,
     "YAC": 0,
     "Play notes": "Curl to Duarte thrown low",
-    "X-axis": 34,
-    "Y-axis": 6
+    "Pass X": 20,
+    "Pass Y": -5,
+    "Receive X": 34,
+    "Receive Y": 6
   },
   {
     "Pass No.": 6,
@@ -110,8 +120,10 @@ virginia = [
     "Yards": 16,
     "YAC": 1,
     "Play notes": "Corner route wedged between 2 defenders in zone coverage",
-    "X-axis": 5,
-    "Y-axis": 15
+    "Pass X": 31,
+    "Pass Y": -9,
+    "Receive X": 5,
+    "Receive Y": 15
   },
   {
     "Pass No.": 7,
@@ -129,8 +141,10 @@ virginia = [
     "Yards": 4,
     "YAC": 0,
     "Play notes": "Curl to Fuller",
-    "X-axis": 34,
-    "Y-axis": 6
+    "Pass X": 20,
+    "Pass Y": -8,
+    "Receive X": 34,
+    "Receive Y": 6
   },
   {
     "Pass No.": 8,
@@ -148,8 +162,10 @@ virginia = [
     "Yards": 9,
     "YAC": 5,
     "Play notes": "Dig route to Mossi Johnson",
-    "X-axis": 36,
-    "Y-axis": 4
+    "Pass X": 30,
+    "Pass Y": -8,
+    "Receive X": 36,
+    "Receive Y": 4
   },
   {
     "Pass No.": 9,
@@ -167,8 +183,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Overthrows Payton on double-move deep route(would have been a touchdown if completed)",
-    "X-axis": 48,
-    "Y-axis": 35
+    "Pass X": 34,
+    "Pass Y": -9,
+    "Receive X": 48,
+    "Receive Y": 35
   },
   {
     "Pass No.": 10,
@@ -186,8 +204,10 @@ virginia = [
     "Yards": -4,
     "YAC": 0,
     "Play notes": "Bubble screen to Mossi Johnson",
-    "X-axis": 45,
-    "Y-axis": -4
+    "Pass X": 34,
+    "Pass Y": -10,
+    "Receive X": 45,
+    "Receive Y": -4
   },
   {
     "Pass No.": 11,
@@ -205,8 +225,10 @@ virginia = [
     "Yards": 10,
     "YAC": 6,
     "Play notes": "Check down to Fuller; Rosen has a hand in his face while throwing b/c McDermott missed block",
-    "X-axis": 44,
-    "Y-axis": 5
+    "Pass X": 34,
+    "Pass Y": -6,
+    "Receive X": 44,
+    "Receive Y": 5
   },
   {
     "Pass No.": 12,
@@ -224,8 +246,10 @@ virginia = [
     "Yards": 1,
     "YAC": 1,
     "Play notes": "Check down to Perkins amid blitzer",
-    "X-axis": 46,
-    "Y-axis": -5
+    "Pass X": 34,
+    "Pass Y": -8,
+    "Receive X": 46,
+    "Receive Y": -5
   },
   {
     "Pass No.": 13,
@@ -243,8 +267,10 @@ virginia = [
     "Yards": 6,
     "YAC": 6,
     "Play notes": "Bubble screen to Fuller",
-    "X-axis": 48,
-    "Y-axis": -2
+    "Pass X": 35,
+    "Pass Y": -6,
+    "Receive X": 48,
+    "Receive Y": -2
   },
   {
     "Pass No.": 14,
@@ -262,8 +288,10 @@ virginia = [
     "Yards": 30,
     "YAC": 0,
     "Play notes": "Double move to Duarte in end zone for TD (man coverage)",
-    "X-axis": 40,
-    "Y-axis": 30
+    "Pass X": 25,
+    "Pass Y": -6,
+    "Receive X": 40,
+    "Receive Y": 30
   },
   {
     "Pass No.": 15,
@@ -281,8 +309,10 @@ virginia = [
     "Yards": 26,
     "YAC": 6,
     "Play notes": "Wheel route to Perkins",
-    "X-axis": 53,
-    "Y-axis": 20
+    "Pass X": 33,
+    "Pass Y": -6,
+    "Receive X": 53,
+    "Receive Y": 20
   },
   {
     "Pass No.": 16,
@@ -300,8 +330,10 @@ virginia = [
     "Yards": -3,
     "YAC": 0,
     "Play notes": "HB screen to Perkins",
-    "X-axis": 43,
-    "Y-axis": -3
+    "Pass X": 34,
+    "Pass Y": -9,
+    "Receive X": 43,
+    "Receive Y": -3
   },
   {
     "Pass No.": 0,
@@ -319,8 +351,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Rosen takes coverage sack for no gain",
-    "X-axis": 0,
-    "Y-axis": 0
+    "Pass X": 0,
+    "Pass Y": 0,
+    "Receive X": 0,
+    "Receive Y": 0
   },
   {
     "Pass No.": 17,
@@ -338,8 +372,10 @@ virginia = [
     "Yards": 17,
     "YAC": 0,
     "Play notes": "Rosen steps up in pocket and throws deep out route to Massington",
-    "X-axis": 2,
-    "Y-axis": 17
+    "Pass X": 33,
+    "Pass Y": -8,
+    "Receive X": 2,
+    "Receive Y": 17
   },
   {
     "Pass No.": 18,
@@ -357,8 +393,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Wheel route for Perkins",
-    "X-axis": 1,
-    "Y-axis": 19
+    "Pass X": 20,
+    "Pass Y": -9,
+    "Receive X": 1,
+    "Receive Y": 19
   },
   {
     "Pass No.": 19,
@@ -376,8 +414,10 @@ virginia = [
     "Yards": 14,
     "YAC": 2,
     "Play notes": "Out route to Massington",
-    "X-axis": 5,
-    "Y-axis": 12
+    "Pass X": 19,
+    "Pass Y": -9,
+    "Receive X": 5,
+    "Receive Y": 12
   },
   {
     "Pass No.": 20,
@@ -395,8 +435,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Rosen gets rid of ball under pressure and nearly completes a perfect pass to back right corner of end zone to Duarte in man coverage",
-    "X-axis": 53,
-    "Y-axis": 19
+    "Pass X": 21,
+    "Pass Y": -9,
+    "Receive X": 53,
+    "Receive Y": 19
   },
   {
     "Pass No.": 21,
@@ -414,8 +456,10 @@ virginia = [
     "Yards": 4,
     "YAC": 0,
     "Play notes": "Curl complete to Payton thrown low",
-    "X-axis": 33,
-    "Y-axis": 4
+    "Pass X": 21,
+    "Pass Y": -8,
+    "Receive X": 33,
+    "Receive Y": 4
   },
   {
     "Pass No.": 22,
@@ -433,8 +477,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Rosen overthrows an open Duarte in back of end zone",
-    "X-axis": 32,
-    "Y-axis": 15
+    "Pass X": 33,
+    "Pass Y": -8,
+    "Receive X": 32,
+    "Receive Y": 15
   },
   {
     "Pass No.": 23,
@@ -452,8 +498,10 @@ virginia = [
     "Yards": 9,
     "YAC": 0,
     "Play notes": "Rosen steps up in pocket to avoid pressure and hits Fuller on curl",
-    "X-axis": 45,
-    "Y-axis": 10
+    "Pass X": 23,
+    "Pass Y": -6,
+    "Receive X": 45,
+    "Receive Y": 10
   },
   {
     "Pass No.": 24,
@@ -471,8 +519,10 @@ virginia = [
     "Yards": 3,
     "YAC": 3,
     "Play notes": "Bubble screen to Fuller",
-    "X-axis": 46,
-    "Y-axis": -3
+    "Pass X": 29,
+    "Pass Y": -5,
+    "Receive X": 46,
+    "Receive Y": -3
   },
   {
     "Pass No.": 25,
@@ -490,8 +540,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Short wheel route to Perkins incomplete, thrown high with a man in Rosen's face as he released it",
-    "X-axis": 49,
-    "Y-axis": 3
+    "Pass X": 34,
+    "Pass Y": -8,
+    "Receive X": 49,
+    "Receive Y": 3
   },
   {
     "Pass No.": 26,
@@ -509,8 +561,10 @@ virginia = [
     "Yards": 0,
     "YAC": 0,
     "Play notes": "Rosen misses an open Payton on curl route at sticks, throws to Jamabo in flat instead and overthrows Jamabo slightly",
-    "X-axis": 10,
-    "Y-axis": -2
+    "Pass X": 32,
+    "Pass Y": -10,
+    "Receive X": 10,
+    "Receive Y": -2
   },
   {
     "Pass No.": 27,
@@ -528,8 +582,10 @@ virginia = [
     "Yards": 37,
     "YAC": 20,
     "Play notes": "Rosen rolls right off play action, throws of back foot to Iese",
-    "X-axis": 45,
-    "Y-axis": 10
+    "Pass X": 36,
+    "Pass Y": -10,
+    "Receive X": 45,
+    "Receive Y": 10
   },
   {
     "Pass No.": 28,
@@ -547,8 +603,10 @@ virginia = [
     "Yards": 11,
     "YAC": 11,
     "Play notes": "Play action flare screen to Fuller left side",
-    "X-axis": 15,
-    "Y-axis": -4
+    "Pass X": 27,
+    "Pass Y": -5,
+    "Receive X": 15,
+    "Receive Y": -4
   },
   {
     "Pass No.": 29,
@@ -566,8 +624,10 @@ virginia = [
     "Yards": 7,
     "YAC": 1,
     "Play notes": "Fuller curl route",
-    "X-axis": 35,
-    "Y-axis": 6
+    "Pass X": 21,
+    "Pass Y": -9,
+    "Receive X": 35,
+    "Receive Y": 6
   },
   {
     "Pass No.": 30,
@@ -585,8 +645,10 @@ virginia = [
     "Yards": 35,
     "YAC": 21,
     "Play notes": "post route to Kenny Walker pefectly thrown on the numbers",
-    "X-axis": 13,
-    "Y-axis": 14
+    "Pass X": 20,
+    "Pass Y": -5,
+    "Receive X": 13,
+    "Receive Y": 14
   },
   {
     "Pass No.": 31,
@@ -604,8 +666,10 @@ virginia = [
     "Yards": 3,
     "YAC": 0,
     "Play notes": "Rosen roll right TD to Clark",
-    "X-axis": 46,
-    "Y-axis": 5
+    "Pass X": 28,
+    "Pass Y": -9,
+    "Receive X": 46,
+    "Receive Y": 5
   },
   {
     "Pass No.": 32,
@@ -623,8 +687,10 @@ virginia = [
     "Yards": 9,
     "YAC": 3,
     "Play notes": "No dropback, Curl to Payton",
-    "X-axis": 4,
-    "Y-axis": 6
+    "Pass X": 19,
+    "Pass Y": -5,
+    "Receive X": 4,
+    "Receive Y": 6
   },
   {
     "Pass No.": 33,
@@ -642,8 +708,10 @@ virginia = [
     "Yards": 18,
     "YAC": 0,
     "Play notes": "No dropback, post route thrown low to Sweet",
-    "X-axis": 37,
-    "Y-axis": 17
+    "Pass X": 29,
+    "Pass Y": -5,
+    "Receive X": 37,
+    "Receive Y": 17
   },
   {
     "Pass No.": 34,
@@ -661,8 +729,10 @@ virginia = [
     "Yards": 41,
     "YAC": 11,
     "Play notes": "Sidestep left two steps; Double move to Payton complete on dep route",
-    "X-axis": 0,
-    "Y-axis": 0
+    "Pass X": 0,
+    "Pass Y": 0,
+    "Receive X": 0,
+    "Receive Y": 0
   },
   {
     "Pass No.": 35,
@@ -680,7 +750,9 @@ virginia = [
     "Yards": 3,
     "YAC": -1,
     "Play notes": "Straight drop, Rosen",
-    "X-axis": 43,
-    "Y-axis": 5
+    "Pass X": 21,
+    "Pass Y": -8,
+    "Receive X": 43,
+    "Receive Y": 5
   }
 ]
