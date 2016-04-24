@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <!--Single Flexbox positioning vs. Multi-nested flex-boxes
 	-create a standard football field flexbox
@@ -55,6 +55,43 @@
 
 </head>
 <body>
+
+	<table class="statsbox">
+		<thead>
+			<th>Category</th>
+			<th>Stats</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Completed Passes</td>
+				<td id="completePasses"></td>
+			</tr>
+			<tr>
+				<td>Total Passes</td>
+				<td id="totalPasses"></td>
+			</tr>
+			<tr>
+				<td>Extraneous Incompletions</td>
+				<td id="extrIncomplete"></td>
+			</tr>
+			<tr>
+				<td>Adjusted Completion Percentage</td>
+				<td id="adjCompletion"></td>
+			</tr>
+			<tr>
+				<td>True Pass Distance</td>
+				<td id="tpDistance"></td>
+			</tr>
+			<tr>
+				<td>Pass Distance</td>
+				<td id="pDistance"></td>
+			</tr>
+			<tr>
+				<td>Receiver</td>
+				<td id="receiver"></td>
+			</tr>
+		</tbody>
+	</table>
 
 <div class="flex-container">
 	
@@ -2756,6 +2793,8 @@
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
 <script type="text/javascript" language="javascript" src="game-data/virginia.json"></script>
 <script type="text/javascript" language="javascript" src="js/passScrollbar.js"></script>
+<script type="text/javascript" language="javascript" src="js/statsBox.js"></script>
+
 
 </body>
 </html>
