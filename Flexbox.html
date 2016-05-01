@@ -52,46 +52,58 @@
 </style>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Exo|Exo:700">
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<!-- Semantic UI -->
+<link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
+<script src="dist/semantic.min.js"></script>
 
 </head>
 <body>
+	<div class="ui huge header" align="center">Statistics</div>
 
-	<table class="statsbox">
-		<thead>
-			<th>Category</th>
-			<th>Stats</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Completed Passes</td>
-				<td id="completePasses"></td>
-			</tr>
-			<tr>
-				<td>Total Passes</td>
-				<td id="totalPasses"></td>
-			</tr>
-			<tr>
-				<td>Extraneous Incompletions</td>
-				<td id="extrIncomplete"></td>
-			</tr>
-			<tr>
-				<td>Adjusted Completion Percentage</td>
-				<td id="adjCompletion"></td>
-			</tr>
-			<tr>
-				<td>True Pass Distance</td>
-				<td id="tpDistance"></td>
-			</tr>
-			<tr>
-				<td>Pass Distance</td>
-				<td id="pDistance"></td>
-			</tr>
-			<tr>
-				<td>Receiver</td>
-				<td id="receiver"></td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="ui equal width grid"> 
+		<div class="column">
+		</div>
+		<div class="column">
+			<div class="ui small horizontal statistics">
+				<div class="statistic">
+					<div class="value"><div id="completePasses"></div></div>
+					<div class="label">Completed Passes (%)</div>
+				</div>
+				<div class="statistic">
+					<div class="value"><div id="totalPasses"></div></div>
+					<div class="label">Total Passes</div>
+				</div>
+				<div class="statistic">
+					<div class="value"><div id="adjCompletion"></div></div>
+					<div class="label">Adjusted Completion (%)</div>
+				</div>
+			</div>
+		</div>
+		<div class="column">
+			<div class="ui small horizontal statistics">
+				<div class="statistic">
+					<div class="value"><div id="extrIncomplete"></div></div>
+					<div class="label">Extraneous Incompletions</div>
+				</div>
+				<div class="statistic">
+					<div class="value"><div id="pDistance"></div></div>
+					<div class="label">Pass Distance (yards)</div>
+				</div>
+				<div class="statistic">
+					<div class="value"><div id="tpDistance"></div></div>
+					<div class="label">True Pass Distance (yards)</div>
+				</div>
+			</div>
+		</div>
+		<div class="column">
+		</div>
+	</div>
+	<div class="ui small horizontal statistics" align="center">
+		<div class="statistic">
+			<div class="value"><div id="receiver"></div></div>
+			<div class="label">Most Passed To Receiver(s)</div>
+		</div>
+	</div>
 
 <div class="flex-container">
 	

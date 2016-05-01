@@ -52,8 +52,8 @@ $(document).ready(function() {
 	document.getElementById('totalPasses').innerHTML=totalPasses;
 	document.getElementById('extrIncomplete').innerHTML=extraneous;
 	document.getElementById('adjCompletion').innerHTML=adjCompletionPercentage + '%';
-	document.getElementById('tpDistance').innerHTML=tpassDistance + ' yards';
-	document.getElementById('pDistance').innerHTML=avgPassDistance + ' yards';
+	document.getElementById('tpDistance').innerHTML=tpassDistance ;
+	document.getElementById('pDistance').innerHTML=avgPassDistance ;
 
 	var frequency = {};
 	var max = 0;
