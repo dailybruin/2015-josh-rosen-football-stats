@@ -28,8 +28,8 @@ $(document).ready(function() {
 				drops += 1;
 		}
 
-		if (pass.hasOwnProperty('X-axis') && pass.hasOwnProperty('Y-axis')) {
-			truePassDistance += Math.sqrt(Math.pow(pass['X-axis'],2) + Math.pow(pass['Y-axis'],2));
+		if (pass.hasOwnProperty('Pass X') && pass.hasOwnProperty('Pass Y') && pass.hasOwnProperty('Receive X') && pass.hasOwnProperty('Receive Y')) {
+			truePassDistance += Math.sqrt((Math.pow(pass['Pass X'],2)+(Math.pow(pass['Receive X'],2))) + (Math.pow(pass['Pass Y'],2) + (Math.pow(pass['Receive Y'],2))));
 		}
 
 		if (pass.hasOwnProperty('Yards') && pass.hasOwnProperty('YAC')) {
