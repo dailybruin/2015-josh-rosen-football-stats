@@ -16,6 +16,9 @@ $(document).ready(function() {
 		if (pass.hasOwnProperty('Qtr.')) {
 			p.attr("quarter", pass["Qtr."]);
 		}
+		if (pass.hasOwnProperty('Play type')) {
+			p.attr("playType", pass["Play type"]);
+		}
 		p.attr("PassNumber", i);
 		
 		var requiredKeys = {
@@ -48,30 +51,53 @@ $(document).ready(function() {
 
 
 $('#quarterDownFilter').change(function() {
+	filter();
+});
+
+$('#playTypeFilter').change(function() {
+	filter();
+});
+
+function filter() {
 	var scrollbar = $("#passScrollbar");
-	var quarterDownFilter = $("#quarterDownFilter");
-	var quarterDownSelected = quarterDownFilter.find(":selected")[0].id;
-	var filtersDown = (quarterDownSelected.substring(0,4) == "down");	//check if filters quarter or down
+	
+	/////////////////////////////////////// quarter down filter
+	var qDFilter = $("#quarterDownFilter");
+	var qDSelectedId = qDFilter.find(":selected")[0].id;
+	var qDSelectedVal = qDFilter.find(":selected").val();
+	var filtersDown = (qDSelectedId.substring(0,4) == "down");	//check if filters quarter or down
+
+
+	///////////////////////////////////////// play type filter
+	var pTFilter = $("#playTypeFilter");
+	var pTSelectedVal = pTFilter.find(":selected").val();
 
 	$('.pass').each(function(i, obj) {
 		$(obj).show();
-		
-		if (filtersDown) {
-			//check downs
-			var downFilter = 'down' + obj.getAttribute("down");
-			if (downFilter !== quarterDownSelected) {
-				$(obj).hide();
+
+		if (qDSelectedVal !== "") {		
+			if (filtersDown) {
+				//check downs
+				var downFilter = obj.getAttribute("down");
+				if (downFilter !== qDSelectedVal) {
+					$(obj).hide();
+				}
+			}
+			else {
+				//check quarters
+				var quarterFilter = obj.getAttribute("quarter");
+				if (quarterFilter !== qDSelectedVal) {
+					$(obj).hide();
+				}
 			}
 		}
-		else {
-			//check quarters
-			var quarterFilter = 'quarter' + obj.getAttribute("quarter");
-			console.log(quarterFilter);
-			console.log(quarterDownSelected);
-			if (quarterFilter !== quarterDownSelected) {
+		
+		if (pTSelectedVal !== "") {
+			//check play type
+			var playTypeFilter = obj.getAttribute("playType");
+			if (playTypeFilter !== pTSelectedVal) {
 				$(obj).hide();
 			}
 		}
 	});
-	
-});
+}
