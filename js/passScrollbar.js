@@ -19,8 +19,8 @@ $(document).ready(function() {
 		p.attr("PassNumber", i);
 		
 		var requiredKeys = {
-			"Qtr.": false, 
-			"Down": false, 
+			"Qtr.": true, 
+			"Down": true, 
 			"Distance": true, 
 			"Play type": true, 
 			"Result of pass": true, 
@@ -47,22 +47,30 @@ $(document).ready(function() {
 });
 
 
-$('#filter').click(function() {
+$('#quarterDownFilter').change(function() {
 	var scrollbar = $("#passScrollbar");
-	
+	var quarterDownFilter = $("#quarterDownFilter");
+	var quarterDownSelected = quarterDownFilter.find(":selected")[0].id;
+	var filtersDown = (quarterDownSelected.substring(0,4) == "down");	//check if filters quarter or down
+
 	$('.pass').each(function(i, obj) {
 		$(obj).show();
 		
-		//check downs
-		var downFilter = $('#down' + obj.getAttribute("down"));
-		if (!downFilter.is(':checked')) {
-			$(obj).hide();
+		if (filtersDown) {
+			//check downs
+			var downFilter = 'down' + obj.getAttribute("down");
+			if (downFilter !== quarterDownSelected) {
+				$(obj).hide();
+			}
 		}
-		
-		//check quarters
-		var quarterFilter = $('#quarter' + obj.getAttribute("quarter"));
-		if (!quarterFilter.is(':checked')) {
-			$(obj).hide();
+		else {
+			//check quarters
+			var quarterFilter = 'quarter' + obj.getAttribute("quarter");
+			console.log(quarterFilter);
+			console.log(quarterDownSelected);
+			if (quarterFilter !== quarterDownSelected) {
+				$(obj).hide();
+			}
 		}
 	});
 	

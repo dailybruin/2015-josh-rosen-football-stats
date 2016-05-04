@@ -2764,35 +2764,19 @@
 </div>
 
 <div id="filter">
-	<div class="downFilters">
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down1" checked>1st Down
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down2" checked>2nd Down
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down3" checked>3rd Down
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down4" checked>4th Down
-		</label>
-	</div>
-	<div class="quarterFilters">
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter1" checked>1st Quarter
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter2" checked>2nd Quarter
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter3" checked>3rd Quarter
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter4" checked>4th Quarter
-		</label>
-	</div>
+	<select id="quarterDownFilter">
+		<option value="" disabled="disabled">Quarter/Down Filter</option>
+		<option value="q1" id="quarter1">1st Quarter</option>
+		<option value="q2" id="quarter2" selected="selected">2nd Quarter</option>
+		<option value="q3" id="quarter3">3rd Quarter</option>
+		<option value="q4" id="quarter4">4th Quarter</option>
+		<option value="d1" id="down1">1st Down</option>
+		<option value="d2" id="down2">2nd Down</option>
+		<option value="d3" id="down3">3rd Down</option>
+		<option value="d4" id="down4">4th Down</option>
+	</select>
 </div>
+
 
 
 <div id="passScrollbarContainer">
