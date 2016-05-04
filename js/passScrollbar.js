@@ -75,7 +75,7 @@ function filter() {
 	$('.pass').each(function(i, obj) {
 		$(obj).show();
 
-		if (qDSelectedVal !== "") {		
+		if (qDSelectedVal !== "" && qDSelectedVal !== "all") {		
 			if (filtersDown) {
 				//check downs
 				var downFilter = obj.getAttribute("down");
@@ -92,7 +92,7 @@ function filter() {
 			}
 		}
 		
-		if (pTSelectedVal !== "") {
+		if (pTSelectedVal !== "" && pTSelectedVal !== "all") {
 			//check play type
 			var playTypeFilter = obj.getAttribute("playType");
 			if (playTypeFilter !== pTSelectedVal) {

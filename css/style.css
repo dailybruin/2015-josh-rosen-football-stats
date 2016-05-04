@@ -1,9 +1,7 @@
 #filter {
-	border: 2px solid black;
-	margin-left: 5%;
-	margin-top: 5%;
+	margin-top: 2%;
 	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
-	width: 600px;
+	width: 500px;
 }
 
 
@@ -41,4 +39,24 @@
 	height: 94%;
 	margin-top: 2%;
 	padding: 1%;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	
+	margin: 5px;
+    background: #007DC3;
+    width: 200px;
+    padding: 5px;
+    font-size: 18px;
+    color: white;
+    border: 2px solid #000;
+    height: 50px;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+select::-ms-expand { /* for IE 11 */
+    display: none;
 }
