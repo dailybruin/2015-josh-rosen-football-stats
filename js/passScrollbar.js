@@ -18,17 +18,29 @@ $(document).ready(function() {
 		}
 		p.attr("PassNumber", i);
 		
+		var requiredKeys = {
+			"Qtr.": false, 
+			"Down": false, 
+			"Distance": true, 
+			"Play type": true, 
+			"Result of pass": true, 
+			"Receiver": true, 
+			"Yards": true,
+			"Distance Of Pass": true
+		};
+		
 		for (var key in pass) {
-			p.append(key + ": " + pass[key] + "<br>");
+			if (key in requiredKeys && requiredKeys[key])
+				p.append(key + ": " + pass[key] + "<br>");
 		}
 		
 		//Calculate absolute distance of pass
-		var xstart = pass["X-axis-pass"], ystart = pass["Y-axis-pass"];
-		var xend = pass["X-axis-receive"], yend = pass["X-axis-receive"];
+		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
+		var xend = pass["Receive X"], yend = pass["Receive Y"];
 		var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
 		absoluteDistance = Math.round(absoluteDistance*100)/100;
 		
-		p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br>");
+		p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
 				
 		scrollbar.append(p);
 	}
