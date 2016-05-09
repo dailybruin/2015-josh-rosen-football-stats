@@ -61,14 +61,39 @@
 
 </style>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Exo|Exo:700">
-<link rel="stylesheet" type="text/css" href="css/style.css">
 <!-- Semantic UI -->
 <link rel="stylesheet" type="text/css" href="dist/semantic.min.css">
 <script src="dist/semantic.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 <body>
 	<div class="ui huge header" align="center">Statistics</div>
+
+	<div class="ui header" align="center">
+		<div id="filter">
+			<select id="quarterDownFilter">
+				<option value="" disabled="disabled" selected="selected">Quarter/Down Filter</option>
+				<option value="all" id="quarterDownAll">All</option>
+				<option value="1" id="quarter1">1st Quarter</option>
+				<option value="2" id="quarter2">2nd Quarter</option>
+				<option value="3" id="quarter3">3rd Quarter</option>
+				<option value="4" id="quarter4">4th Quarter</option>
+				<option value="1" id="down1">1st Down</option>
+				<option value="2" id="down2">2nd Down</option>
+				<option value="3" id="down3">3rd Down</option>
+				<option value="4" id="down4">4th Down</option>
+			</select>
+			<select id="playTypeFilter">
+				<option value="" disabled="disabled" selected="selected">Play Type Filter</option>
+				<option value="all" id="playTypeAll">All</option>
+				<option value="Pass" id="playType1">Pass</option>
+				<option value="PA Pass" id="playType2">PA Pass</option>
+				<option value="Screen pass" id="playType3">Screen pass</option>
+			</select>
+		</div>
+	</div>
+
 
 	<div class="ui equal width grid"> 
 		<div class="column">
@@ -115,44 +140,17 @@
 		</div>
 	</div>
 
+
 <div class="flex-container" id="field">
 	<div class="flex-item">
 		<svg margin="auto">
 			<circle cx="2" cy="2" r="2" fill="red">
 		</svg>
 	</div>
+
 </div>
 
-<div id="filter">
-	<div class="downFilters">
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down1" checked>1st Down
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down2" checked>2nd Down
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down3" checked>3rd Down
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="down4" checked>4th Down
-		</label>
-	</div>
-	<div class="quarterFilters">
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter1" checked>1st Quarter
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter2" checked>2nd Quarter
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter3" checked>3rd Quarter
-		</label>
-		<label class="checkbox-inline">
-			<input type="checkbox" id="quarter4" checked>4th Quarter
-		</label>
-	</div>
-</div>
+
 
 
 <div id="passScrollbarContainer">
