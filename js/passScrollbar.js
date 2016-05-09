@@ -1,5 +1,20 @@
 $(document).ready(function() {
 
+
+	var field = $("#field");
+	for (var g = 0; g < 2650; g++){
+		var x = (g % 53) + 1;
+		var y = (51 - (Math.floor(g/53) + 1)) - 10;
+		var p;
+		if( x == 1 && y == 53) {
+			p = $('<div class="flex-item" id="' + x + "-" + y + "\"" + "><svg height=\"2\" width=\"2\"><circle cx=\"1\" cy=\"1\" r=\"5\" fill=\"red\"></svg></div>");
+
+		} else {
+			p = $('<div class="flex-item" id="' + x + "-" + y + "\"" + "> </div>");	
+		}
+		field.append(p);
+	}
+
 	var scrollbar = $("#passScrollbar");
 	var gamePasses = virginia;
 	
@@ -32,6 +47,9 @@ $(document).ready(function() {
 				
 		scrollbar.append(p);
 	}
+
+
+
 });
 
 
