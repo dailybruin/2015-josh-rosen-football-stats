@@ -7,8 +7,6 @@ var getPos = function(el)
 }
 
 $(document).ready(function() {
-
-
 	var field = $("#field");
 	for (var g = 0; g < 2650; g++){
 		var x = (g % 53) + 1;
@@ -71,44 +69,44 @@ $(document).ready(function() {
 		scrollbar.append(p);
 	}
 
-	var div = document.createElement('div');
-    	div.className = 'fred';
-	 	div.innerHTML = "<div ";
-
-     	document.getElementById('hoverContainer').appendChild(div);
-     	console.log("Added element");
-
     // Add a hoverbox to html on hoverover of div 
 	$("#bob").mouseover(function() {
 		var html = "", styling = "", content = "";
 		var pass = gamePasses[2];
 
+		// Get data from JSON
 		var receiver 	= pass["Receiver"], 
 			result  	= pass["Result of pass"], 
 			ex_comp  	= pass["Extraneous Incompletions"];
 
+		// Get coords of div the user hoverd over
 		var div 		= document.getElementById("bob"), 
 			pos 		= getPos(div);
 
-		styling = 	"<div style=\"" + 
-					"z-index: 10; " + 
-					"width:400px; " + 
-					"height:200px; " + 
-					"position:absolute; " + 
-					"background-color: lightblue; " + 
+		// Define styling (coords) of hoverbox - more styling in css file
+		styling = 	"<div id=\"fred\" class=\"hoverbox\" style=\"" + 
 					"top:" + pos.y + "px; " + 
 					"left:" + pos.x + "px;" +  
 					"\">";
 
-		content = 	"<p>Receiver: "					+ receiver 	+ "</p>" + 
-					"<p>Result: " 					+ result 	+ "</p>" + 
-					"<p>Extraneous Incompletions: " + ex_comp 	+ "</p></div>";
+		// Pull JSON data into hoverbox
+		content = 	"<p>" +
+					"<b>PASS DATA</b><br>" + 
+					"Receiver: "					+ receiver 	+ "<br>" + 
+					"Result: " 						+ result 	+ "<br>" + 
+					"Extraneous Incompletions: " 	+ ex_comp 	+ 
+					"</p></div>";
 		
 		html = styling;
 		html += content;
 
   		$("#hoverContainer").append(html);
 	});
+
+	// $(".hoverbox").mouseleave(function() {	// TACO
+	// 	$(this).hide();
+	// 	console.log("Mouse left hoverbox");
+	// });
 });
 
 
