@@ -1,3 +1,11 @@
+var getPos = function(el) 
+{
+    for (var lx=0, ly=0; el != null;
+         	lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+
+    return {x: lx,y: ly};
+}
+
 $(document).ready(function() {
 
 
@@ -63,8 +71,44 @@ $(document).ready(function() {
 		scrollbar.append(p);
 	}
 
+	var div = document.createElement('div');
+    	div.className = 'fred';
+	 	div.innerHTML = "<div ";
 
+     	document.getElementById('hoverContainer').appendChild(div);
+     	console.log("Added element");
 
+    // Add a hoverbox to html on hoverover of div 
+	$("#bob").mouseover(function() {
+		var html = "", styling = "", content = "";
+		var pass = gamePasses[2];
+
+		var receiver 	= pass["Receiver"], 
+			result  	= pass["Result of pass"], 
+			ex_comp  	= pass["Extraneous Incompletions"];
+
+		var div 		= document.getElementById("bob"), 
+			pos 		= getPos(div);
+
+		styling = 	"<div style=\"" + 
+					"z-index: 10; " + 
+					"width:400px; " + 
+					"height:200px; " + 
+					"position:absolute; " + 
+					"background-color: lightblue; " + 
+					"top:" + pos.y + "px; " + 
+					"left:" + pos.x + "px;" +  
+					"\">";
+
+		content = 	"<p>Receiver: "					+ receiver 	+ "</p>" + 
+					"<p>Result: " 					+ result 	+ "</p>" + 
+					"<p>Extraneous Incompletions: " + ex_comp 	+ "</p></div>";
+		
+		html = styling;
+		html += content;
+
+  		$("#hoverContainer").append(html);
+	});
 });
 
 
