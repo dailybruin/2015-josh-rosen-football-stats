@@ -103,10 +103,13 @@ $(document).ready(function() {
   		$("#hoverContainer").append(html);
 	});
 
-	// $(".hoverbox").mouseleave(function() {	// TACO
-	// 	$(this).hide();
-	// 	console.log("Mouse left hoverbox");
-	// });
+	// Hide any existing hoverboxes when mouse leaves them
+		// DO NOT change from on function - need to use on because it binds the handler hoverContainer
+		// Cannot bind to dynamically generated hoverboxes before they exist
+	$("#hoverContainer").on("mouseleave", ".hoverbox", function() {
+	   $(this).hide(); 
+	});
+
 });
 
 
