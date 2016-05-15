@@ -7,12 +7,12 @@
 #fieldContainer {
 	height: 45vw;
 	margin: 5%;
-	margin-left: 22%
+	margin-left: 21%
 }
 
 #passScrollbarContainer {
 	border: 2px solid black;
-	width: 13vw;
+	width: 15vw;
 	height: 41vw;
 	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 	background-color: #007DC3;
