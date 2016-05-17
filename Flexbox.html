@@ -29,14 +29,14 @@
 	display: flex;
 	/*53x50 yard field is proportional top: o 37.1x70
 	width of 70 is 100yards*/
-	width: 42.4vw;
-	height: 41vw;
+	width: 63vw;
+	height: 48vw;
 	margin: 0;
 	padding: 0;
-		background-image: url("fieldrough.png") ;
+	background-image: url("UCLA_Field2.png") ;
 	background-repeat: no-repeat;
 	background-position: left top;
-	background-size: 42.4vw 41vw;
+	background-size: 63vw 48vw;
 	/*background-color: #4a7736;*/
 	/*Items are evenly distributed in a given line*/
 	justify-content: space-around;
@@ -48,10 +48,24 @@
 	/*Allow eatch itme to grow to take the extra space around the squares*/
 	flex-grow: 1;
 	/*background-color: cornflowerblue;*/
-	width: .8vw;
-	height: .8vw;	
+	width: 1vw;
+	height: 1vw;	
 	margin: auto;
 	margin-top:0px;
+}
+
+.flex-item-r {
+		/*Allow eatch itme to grow to take the extra space around the squares*/
+	flex-grow: 1;
+	/*background-color: cornflowerblue;*/
+	width: 1vw;
+	height: 1vw;	
+	margin: auto;
+	margin-top:0px;
+	background-image: url("red-dot.png") ;
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: 1vw 1vw;
 }
 
 
@@ -142,11 +156,7 @@
 
 
 <div class="flex-container" id="field">
-	<div class="flex-item">
-		<svg margin="auto">
-			<circle cx="2" cy="2" r="2" fill="red">
-		</svg>
-	</div>
+
 
 </div>
 
