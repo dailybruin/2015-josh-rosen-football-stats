@@ -36,15 +36,18 @@ $(document).ready(function() {
 		}
 		p.attr("PassNumber", i);
 		
+		p.append("Pass #: " + (i+1) + "<br>");
+		
 		var requiredKeys = {
-			"Qtr.": true, 
-			"Down": true, 
-			"Distance": true, 
-			"Play type": true, 
-			"Result of pass": true, 
-			"Receiver": true, 
-			"Yards": true,
-			"Distance Of Pass": true
+			"Qtr.": false, 
+			"Down": false, 
+			"Distance": false, 
+			"Play type": false, 
+			"Result of pass": false, 
+			"Receiver": false, 
+			"Yards": false,
+			"Distance Of Pass": false,
+			"Play notes": true
 		};
 		
 		for (var key in pass) {
@@ -58,7 +61,8 @@ $(document).ready(function() {
 		var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
 		absoluteDistance = Math.round(absoluteDistance*100)/100;
 		
-		p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
+		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
+		p.append("<hr>");
 				
 		scrollbar.append(p);
 	}
