@@ -30,6 +30,18 @@ $(document).ready(function() {
 		if (pass.hasOwnProperty('Play type')) {
 			p.attr("playType", pass["Play type"]);
 		}
+		if (pass.hasOwnProperty('Pass X')) {
+			p.attr("xstart", pass["Pass X"]);
+		}
+		if (pass.hasOwnProperty('Pass Y')) {
+			p.attr("ystart", pass["Pass Y"]);
+		}
+		if (pass.hasOwnProperty('Receive X')) {
+			p.attr("xend", pass["Receive X"]);
+		}
+		if (pass.hasOwnProperty('Receive Y')) {
+			p.attr("yend", pass["Receive Y"]);
+		}
 		p.attr("PassNumber", i);
 		
 		p.append("Pass #: " + (i+1) + "<br>");
@@ -51,9 +63,9 @@ $(document).ready(function() {
 				p.append(key + ": " + pass[key] + "<br>");
 		}
 		
-		//Calculate absolute distance of pass
 		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
 		var xend = pass["Receive X"], yend = pass["Receive Y"];
+		//Calculate absolute distance of pass
 		var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
 		absoluteDistance = Math.round(absoluteDistance*100)/100;
 
@@ -97,6 +109,12 @@ function filter() {
 
 	$('.pass').each(function(i, obj) {
 		$(obj).show();
+		var xstart = obj.getAttribute("xstart");
+		var ystart = obj.getAttribute("ystart");
+		var xend = obj.getAttribute("xend");
+		var yend = obj.getAttribute("yend");
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
+		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
 
 		if (qDSelectedVal !== "" && qDSelectedVal !== "all") {		
 			if (filtersDown) {
@@ -104,6 +122,8 @@ function filter() {
 				var downFilter = obj.getAttribute("down");
 				if (downFilter !== qDSelectedVal) {
 					$(obj).hide();
+					$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
+					$("#" + xend + "-" + yend).attr('class', 'flex-item');
 				}
 			}
 			else {
@@ -111,6 +131,8 @@ function filter() {
 				var quarterFilter = obj.getAttribute("quarter");
 				if (quarterFilter !== qDSelectedVal) {
 					$(obj).hide();
+					$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
+					$("#" + xend + "-" + yend).attr('class', 'flex-item');
 				}
 			}
 		}
@@ -120,6 +142,8 @@ function filter() {
 			var playTypeFilter = obj.getAttribute("playType");
 			if (playTypeFilter !== pTSelectedVal) {
 				$(obj).hide();
+				$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
+				$("#" + xend + "-" + yend).attr('class', 'flex-item');
 			}
 		}
 	});
