@@ -37,7 +37,7 @@
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: 63vw 48vw;
-	/*background-color: #4a7736;*/
+	background-color: #4a7736;
 	/*Items are evenly distributed in a given line*/
 	justify-content: space-around;
 	align-content: flex-start;
@@ -113,7 +113,7 @@
 		<div class="column">
 		</div>
 		<div class="column">
-			<div class="ui small horizontal statistics">
+			<div class="ui large horizontal statistics">
 				<div class="statistic">
 					<div class="value"><div id="completePasses"></div></div>
 					<div class="label">Completed Passes (%)</div>
@@ -129,7 +129,7 @@
 			</div>
 		</div>
 		<div class="column">
-			<div class="ui small horizontal statistics">
+			<div class="ui large horizontal statistics">
 				<div class="statistic">
 					<div class="value"><div id="extrIncomplete"></div></div>
 					<div class="label">Extraneous Incompletions</div>
@@ -147,34 +147,30 @@
 		<div class="column">
 		</div>
 	</div>
-	<div class="ui small horizontal statistics" align="center">
+	<div class="ui large horizontal statistics" align="center">
 		<div class="statistic">
 			<div class="value"><div id="receiver"></div></div>
 			<div class="label">Most Passed To Receiver(s)</div>
 		</div>
 	</div>
 
-
-<div class="flex-container" id="field">
-
-
+<div id="box">
+	<div id="passScrollbarContainer">
+		<div id="passScrollbarTitle">
+			<p>Pass Scrollbar</p>
+		</div>
+		<div id="passScrollbar">
+		</div>
+	</div>
+	<div class="flex-container" id="field"></div>
 </div>
 
 
 
-
-<div id="passScrollbarContainer">
-	<div id="passScrollbarTitle">
-		<p>Pass Scrollbar</p>
-	</div>
-	<div id="passScrollbar">
-	</div>
-</div>
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
 <script type="text/javascript" language="javascript" src="game-data/virginia.json"></script>
 <script type="text/javascript" language="javascript" src="js/passScrollbar.js"></script>
 <script type="text/javascript" language="javascript" src="js/statsBox.js"></script>
-
 
 </body>
 </html>
