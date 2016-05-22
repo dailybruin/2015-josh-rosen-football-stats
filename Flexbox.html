@@ -18,9 +18,7 @@
 		-how we position it may depend on what item it is
   	TODO: Create a system for arrows from point to point
 -->
-<svg height="10" width="10">
-	<circle cx="5" cy="5" r="5" fill="red"/>
-</svg>
+<div class="regular-circ"></div>
 <style> 
 .flex-container {
 	padding: 0px;
@@ -33,7 +31,7 @@
 	height: 48vw;
 	margin: 0;
 	padding: 0;
-	background-image: url("UCLA_Field2.png") ;
+	background-image: url("UCLA_Field.png") ;
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: 63vw 48vw;
@@ -62,12 +60,24 @@
 	height: 1vw;	
 	margin: auto;
 	margin-top:0px;
-	background-image: url("red-dot.png") ;
+	background-image: url("circle.svg") ;
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: 1vw 1vw;
 }
 
+.regular-circ {
+	width: 1vw;
+	height: 1vw;	
+	margin: auto;
+	margin-top:0px;
+	background-image: url("circle.svg") ;
+	background-color: red;
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: 1vw 1vw;
+	fill: red;
+}
 
 .container {
 
