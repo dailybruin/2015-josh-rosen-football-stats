@@ -1,6 +1,12 @@
+var getPos = function(el) 
+{
+    for (var lx=0, ly=0; el != null;
+         	lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+
+    return {x: lx,y: ly};
+}
+
 $(document).ready(function() {
-
-
 	var field = $("#field");
 	for (var g = 0; g < 3024; g++){
 		var x = (g % 63) - 5;
@@ -80,7 +86,49 @@ $(document).ready(function() {
 		scrollbar.append(p);
 	}
 
+    // Add a hoverbox to html on hoverover of div 
+	$("#bob").mouseover(function() {
+		var html = "", styling = "", content = "";
+		var pass = gamePasses[2];
 
+		// Get data from JSON
+		var receiver 	= pass["Receiver"], 
+			result  	= pass["Result of pass"], 
+			ex_comp  	= pass["Extraneous Incompletions"], 
+			yac 		= pass["YAC"];
+
+		// Get coords of div the user hoverd over
+		var div 		= document.getElementById("bob"), 
+			pos 		= getPos(div);
+
+		// Define styling (coords) of hoverbox - more styling in css file
+		styling = 	"<div id=\"fred\" class=\"hoverbox\" style=\"" + 
+					"top:" + pos.y + "px; " + 
+					"left:" + pos.x + "px;" +  
+					"\">";
+
+		// Pull JSON data into hoverbox
+		content = 	"<p>" +
+					"<b>PASS DATA</b><br>" + 
+					"Receiver: "					+ receiver 	+ "<br>" + 
+					"Result: " 						+ result 	+ "<br>" + 
+					"Extraneous Incompletions: " 	+ ex_comp 	+ "<br>" + 
+					"YAC: "							+ yac 		+ "<br>" + 
+					"<a href=\"https://www.youtube.com/watch?v=IFfLCuHSZ-U\">Test link do not click death</a>" + 
+					"</p></div>";
+		
+		html = styling;
+		html += content;
+
+  		$("#hoverContainer").append(html);
+	});
+
+	// Hide any existing hoverboxes when mouse leaves them
+		// DO NOT change from on function - need to use on because it binds the handler hoverContainer
+		// Cannot bind to dynamically generated hoverboxes before they exist
+	$("#hoverContainer").on("mouseleave", ".hoverbox", function() {
+	   $(this).hide(); 
+	});
 
 });
 
