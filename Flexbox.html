@@ -18,9 +18,7 @@
 		-how we position it may depend on what item it is
   	TODO: Create a system for arrows from point to point
 -->
-<svg height="10" width="10">
-	<circle cx="5" cy="5" r="5" fill="red"/>
-</svg>
+<div class="regular-circ"></div>
 <style> 
 .flex-container {
 	padding: 0px;
@@ -29,15 +27,15 @@
 	display: flex;
 	/*53x50 yard field is proportional top: o 37.1x70
 	width of 70 is 100yards*/
-	width: 42.4vw;
-	height: 41vw;
+	width: 63vw;
+	height: 48vw;
 	margin: 0;
 	padding: 0;
-		background-image: url("fieldrough.png") ;
+	background-image: url("UCLA_Field.png") ;
 	background-repeat: no-repeat;
 	background-position: left top;
-	background-size: 42.4vw 41vw;
-	/*background-color: #4a7736;*/
+	background-size: 63vw 48vw;
+	background-color: #4a7736;
 	/*Items are evenly distributed in a given line*/
 	justify-content: space-around;
 	align-content: flex-start;
@@ -48,12 +46,38 @@
 	/*Allow eatch itme to grow to take the extra space around the squares*/
 	flex-grow: 1;
 	/*background-color: cornflowerblue;*/
-	width: .8vw;
-	height: .8vw;	
+	width: 1vw;
+	height: 1vw;	
 	margin: auto;
 	margin-top:0px;
 }
 
+.flex-item-r {
+		/*Allow eatch itme to grow to take the extra space around the squares*/
+	flex-grow: 1;
+	/*background-color: cornflowerblue;*/
+	width: 1vw;
+	height: 1vw;	
+	margin: auto;
+	margin-top:0px;
+	background-image: url("circles/orange.svg") ;
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: 1vw 1vw;
+}
+
+.regular-circ {
+	width: 1vw;
+	height: 1vw;	
+	margin: auto;
+	margin-top:0px;
+	background-image: url("circles/orange.svg") ;
+	background-color: red;
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: 1vw 1vw;
+	fill: red;
+}
 
 .container {
 
@@ -102,8 +126,8 @@
 		<div class="column">
 		</div>
 		<div class="column">
-			<div class="ui small horizontal statistics">
-				<div class="statistic" id="small-stat">
+			<div class="ui horizontal statistics">
+				<div class="statistic">
 					<div class="value"><div id="completePasses"></div></div>
 					<div class="label">Completed Passes (%)</div>
 				</div>
@@ -118,7 +142,7 @@
 			</div>
 		</div>
 		<div class="column">
-			<div class="ui small horizontal statistics">
+			<div class="ui horizontal statistics">
 				<div class="statistic">
 					<div class="value"><div id="extrIncomplete"></div></div>
 					<div class="label">Extraneous Incompletions</div>
@@ -136,14 +160,14 @@
 		<div class="column">
 		</div>
 	</div>
-	<div class="ui small horizontal statistics" align="center">
+	<div class="ui horizontal statistics" align="center">
 		<div class="statistic">
 			<div class="value"><div id="receiver"></div></div>
 			<div class="label">Most Passed To Receiver(s)</div>
 		</div>
 	</div>
 
-<div id="fieldContainer">
+<div id="box">
 	<div id="passScrollbarContainer">
 		<div id="passScrollbarTitle">
 			<p>Pass Scrollbar</p>
@@ -151,6 +175,7 @@
 		<div id="passScrollbar">
 		</div>
 	</div>
+<<<<<<< HEAD
 
 
 	<div class="flex-container" id="field">
@@ -162,11 +187,17 @@
 	</div>
 </div>
 
+=======
+	<div class="flex-container" id="field"></div>
+</div>
+
+
+
+>>>>>>> master
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
 <script type="text/javascript" language="javascript" src="game-data/virginia.json"></script>
 <script type="text/javascript" language="javascript" src="js/passScrollbar.js"></script>
 <script type="text/javascript" language="javascript" src="js/statsBox.js"></script>
-
 
 </body>
 </html>

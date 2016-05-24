@@ -8,16 +8,12 @@ var getPos = function(el)
 
 $(document).ready(function() {
 	var field = $("#field");
-	for (var g = 0; g < 2650; g++){
-		var x = (g % 53) + 1;
-		var y = (51 - (Math.floor(g/53) + 1)) - 10;
+	for (var g = 0; g < 3024; g++){
+		var x = (g % 63) - 5;
+		var y = (36 - (Math.floor(g/63) + 1));
 		var p;
-		if( x == 1 && y == 53) {
-			p = $('<div class="flex-item" id="' + x + "-" + y + "\"" + "><svg height=\"2\" width=\"2\"><circle cx=\"1\" cy=\"1\" r=\"5\" fill=\"red\"></svg></div>");
-
-		} else {
-			p = $('<div class="flex-item" id="' + x + "-" + y + "\"" + "> </div>");	
-		}
+		p = $('<div class="flex-item" id="' + x + "-" + y + "\"" + "> </div>");	
+		
 		field.append(p);
 	}
 
@@ -40,17 +36,32 @@ $(document).ready(function() {
 		if (pass.hasOwnProperty('Play type')) {
 			p.attr("playType", pass["Play type"]);
 		}
+		if (pass.hasOwnProperty('Pass X')) {
+			p.attr("xstart", pass["Pass X"]);
+		}
+		if (pass.hasOwnProperty('Pass Y')) {
+			p.attr("ystart", pass["Pass Y"]);
+		}
+		if (pass.hasOwnProperty('Receive X')) {
+			p.attr("xend", pass["Receive X"]);
+		}
+		if (pass.hasOwnProperty('Receive Y')) {
+			p.attr("yend", pass["Receive Y"]);
+		}
 		p.attr("PassNumber", i);
 		
+		p.append("Pass #: " + (i+1) + "<br>");
+		
 		var requiredKeys = {
-			"Qtr.": true, 
-			"Down": true, 
-			"Distance": true, 
-			"Play type": true, 
-			"Result of pass": true, 
-			"Receiver": true, 
-			"Yards": true,
-			"Distance Of Pass": true
+			"Qtr.": false, 
+			"Down": false, 
+			"Distance": false, 
+			"Play type": false, 
+			"Result of pass": false, 
+			"Receiver": false, 
+			"Yards": false,
+			"Distance Of Pass": false,
+			"Play notes": true
 		};
 		
 		for (var key in pass) {
@@ -58,13 +69,19 @@ $(document).ready(function() {
 				p.append(key + ": " + pass[key] + "<br>");
 		}
 		
-		//Calculate absolute distance of pass
 		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
 		var xend = pass["Receive X"], yend = pass["Receive Y"];
+		//Calculate absolute distance of pass
 		var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
 		absoluteDistance = Math.round(absoluteDistance*100)/100;
-		
-		p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
+
+		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
+
+
+		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
+		p.append("<hr>");
+
 				
 		scrollbar.append(p);
 	}
@@ -140,6 +157,12 @@ function filter() {
 
 	$('.pass').each(function(i, obj) {
 		$(obj).show();
+		var xstart = obj.getAttribute("xstart");
+		var ystart = obj.getAttribute("ystart");
+		var xend = obj.getAttribute("xend");
+		var yend = obj.getAttribute("yend");
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
+		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
 
 		if (qDSelectedVal !== "" && qDSelectedVal !== "all") {		
 			if (filtersDown) {
@@ -147,6 +170,8 @@ function filter() {
 				var downFilter = obj.getAttribute("down");
 				if (downFilter !== qDSelectedVal) {
 					$(obj).hide();
+					$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
+					$("#" + xend + "-" + yend).attr('class', 'flex-item');
 				}
 			}
 			else {
@@ -154,6 +179,8 @@ function filter() {
 				var quarterFilter = obj.getAttribute("quarter");
 				if (quarterFilter !== qDSelectedVal) {
 					$(obj).hide();
+					$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
+					$("#" + xend + "-" + yend).attr('class', 'flex-item');
 				}
 			}
 		}
@@ -163,6 +190,8 @@ function filter() {
 			var playTypeFilter = obj.getAttribute("playType");
 			if (playTypeFilter !== pTSelectedVal) {
 				$(obj).hide();
+				$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
+				$("#" + xend + "-" + yend).attr('class', 'flex-item');
 			}
 		}
 	});
