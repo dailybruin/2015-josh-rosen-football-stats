@@ -71,6 +71,18 @@
     margin: 0 auto;
 }
 
+.hoverbox {
+	z-index: 10;
+	position: absolute;
+
+	padding-top: 12px;
+	padding-left: 23px;
+	padding-right: 23px;
+	padding-bottom: 20px;
+
+	background-color: rgba(255, 255, 255, 0.8);
+}
+
 select {
 	-webkit-appearance: none;
 	-moz-appearance: none;

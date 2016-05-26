@@ -72,18 +72,74 @@ $(document).ready(function() {
 		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
 		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
 
-
 		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
-		p.append("<hr>");
-
-				
+		p.append("<hr>");		
 		scrollbar.append(p);
+
+		createHoverBox(pass);
+
+		$('.flex-item-r').mouseover(function() {
+			var hid = "#" + this.id + "hbox";
+
+			var receivePt = document.getElementById(this.id);
+			pos = getPos(receivePt);
+
+			$(hid).css('top', pos.y + "px");
+			$(hid).css('left', pos.x + "px");
+			$(hid).show();
+		});
+
+		// Hide any existing hoverboxes when mouse leaves them
+			// DO NOT change from on function - need to use on because it binds the handler hoverContainer
+			// Cannot bind to dynamically generated hoverboxes before they exist
+		$("#hoverContainer").on("mouseleave", ".hoverbox", function() {
+		   $(this).hide(); 
+		});
 	}
-
-
-
 });
 
+function createHoverBox(pass) {
+	var html = "", header = "", content = "";
+
+	// Find names of relevant divs
+	var xend = pass["Receive X"], yend = pass["Receive Y"];
+	var pt_id = "#" + xend + "-" + yend,
+		h_id = xend + "-" + yend + "hbox";
+
+	// Get data from JSON
+	var receiver 	= pass["Receiver"], 
+		result  	= pass["Result of pass"], 
+		ex_comp  	= pass["Extraneous Incompletions"], 
+		yac 		= pass["YAC"];
+
+	// Define styling (coords) of hoverbox - more styling in css file
+	header = 	"<div id=\"" + h_id + "\" class=\"hoverbox\">";
+
+	// Pull JSON data into hoverbox
+	content = 	"<p>" +
+				"<b>PASS DATA</b><br>" + 
+				"Receiver: "					+ receiver 	+ "<br>" + 
+				"Result: " 						+ result 	+ "<br>" + 
+				"Extraneous Incompletions: " 	+ ex_comp 	+ "<br>" + 
+				"YAC: "							+ yac 		+ "<br>" + 
+				"<a href=\"https://www.youtube.com/watch?v=IFfLCuHSZ-U\">Test link do not click death</a>" + 
+				"</p></div>";
+	
+	html = header;
+	html += content;
+
+	$("#hoverContainer").append(html);
+	$('.hoverbox').hide();
+	// $("#" + h_id).show();
+};
+
+function getPos(el) 
+{
+    for (var lx=0, ly=0; el != null;
+         	lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+
+    return {x: lx,y: ly};
+}
 
 $('#quarterDownFilter').change(function() {
 	filter();
