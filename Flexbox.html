@@ -18,7 +18,6 @@
 		-how we position it may depend on what item it is
   	TODO: Create a system for arrows from point to point
 -->
-<div class="regular-circ"></div>
 <style> 
 .flex-container {
 	padding: 0px;
@@ -52,7 +51,7 @@
 	margin-top:0px;
 }
 
-.flex-item-r {
+.flex-item-o {
 		/*Allow eatch itme to grow to take the extra space around the squares*/
 	flex-grow: 1;
 	/*background-color: cornflowerblue;*/
@@ -66,17 +65,32 @@
 	background-size: 1vw 1vw;
 }
 
-.regular-circ {
+.flex-item-lg {
+		/*Allow eatch itme to grow to take the extra space around the squares*/
+	flex-grow: 1;
+	/*background-color: cornflowerblue;*/
 	width: 1vw;
 	height: 1vw;	
 	margin: auto;
 	margin-top:0px;
-	background-image: url("circles/orange.svg") ;
-	background-color: red;
+	background-image: url("circles/lime_green.svg") ;
 	background-repeat: no-repeat;
 	background-position: left top;
 	background-size: 1vw 1vw;
-	fill: red;
+}
+
+.flex-item-r {
+		/*Allow eatch itme to grow to take the extra space around the squares*/
+	flex-grow: 1;
+	/*background-color: cornflowerblue;*/
+	width: 1vw;
+	height: 1vw;	
+	margin: auto;
+	margin-top:0px;
+	background-image: url("circles/red.svg") ;
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: 1vw 1vw;
 }
 
 .container {
@@ -176,10 +190,16 @@
 		<div id="passScrollbar">
 		</div>
 	</div>
-	<div class="flex-container" id="field"></div>
+
+
+	<div class="flex-container" id="field">
+		<div class="flex-item" id="bob">
+			<svg margin="auto">
+				<circle cx="2" cy="2" r="2" fill="red"/>
+			</svg>
+		</div>
+	</div>
 </div>
-
-
 
 <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
 <script type="text/javascript" language="javascript" src="game-data/virginia.json"></script>

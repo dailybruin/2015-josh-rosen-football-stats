@@ -1,6 +1,12 @@
+var getPos = function(el) 
+{
+    for (var lx=0, ly=0; el != null;
+         	lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+
+    return {x: lx,y: ly};
+}
+
 $(document).ready(function() {
-
-
 	var field = $("#field");
 	for (var g = 0; g < 3024; g++){
 		var x = (g % 63) - 5;
@@ -42,6 +48,9 @@ $(document).ready(function() {
 		if (pass.hasOwnProperty('Receive Y')) {
 			p.attr("yend", pass["Receive Y"]);
 		}
+		if (pass.hasOwnProperty('Result of pass')) {
+			p.attr("passResult", pass["Result of pass"]);
+		}
 		p.attr("PassNumber", i);
 		
 		p.append("Pass #: " + (i+1) + "<br>");
@@ -69,8 +78,16 @@ $(document).ready(function() {
 		var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
 		absoluteDistance = Math.round(absoluteDistance*100)/100;
 
-		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
-		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
+		var passResult = pass["Result of pass"];
+		if(passResult === "Complete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
+		} else if(passResult === "Incomplete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+		} else {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
+		}
+
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
 
 		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
 		p.append("<hr>");		
@@ -78,7 +95,7 @@ $(document).ready(function() {
 
 		createHoverBox(pass);
 
-		$('.flex-item-r').mouseover(function() {
+		$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
 			var hid = "#" + this.id + "hbox";
 
 			var receivePt = document.getElementById(this.id);
@@ -87,6 +104,43 @@ $(document).ready(function() {
 			$(hid).css('top', pos.y + "px");
 			$(hid).css('left', pos.x + "px");
 			$(hid).show();
+		});
+
+	    // Add a hoverbox to html on hoverover of div 
+		$("#bob").mouseover(function() {
+			var html = "", styling = "", content = "";
+			var pass = gamePasses[2];
+
+			// Get data from JSON
+			var receiver 	= pass["Receiver"], 
+				result  	= pass["Result of pass"], 
+				ex_comp  	= pass["Extraneous Incompletions"], 
+				yac 		= pass["YAC"];
+
+			// Get coords of div the user hoverd over
+			var div 		= document.getElementById("bob"), 
+				pos 		= getPos(div);
+
+			// Define styling (coords) of hoverbox - more styling in css file
+			styling = 	"<div id=\"fred\" class=\"hoverbox\" style=\"" + 
+						"top:" + pos.y + "px; " + 
+						"left:" + pos.x + "px;" +  
+						"\">";
+
+			// Pull JSON data into hoverbox
+			content = 	"<p>" +
+						"<b>PASS DATA</b><br>" + 
+						"Receiver: "					+ receiver 	+ "<br>" + 
+						"Result: " 						+ result 	+ "<br>" + 
+						"Extraneous Incompletions: " 	+ ex_comp 	+ "<br>" + 
+						"YAC: "							+ yac 		+ "<br>" + 
+						"<a href=\"https://www.youtube.com/watch?v=IFfLCuHSZ-U\">Test link do not click death</a>" + 
+						"</p></div>";
+
+			html = styling;
+			html += content;
+
+	  		$("#hoverContainer").append(html);
 		});
 
 		// Hide any existing hoverboxes when mouse leaves them
@@ -130,7 +184,6 @@ function createHoverBox(pass) {
 
 	$("#hoverContainer").append(html);
 	$('.hoverbox').hide();
-	// $("#" + h_id).show();
 };
 
 function getPos(el) 
@@ -169,8 +222,18 @@ function filter() {
 		var ystart = obj.getAttribute("ystart");
 		var xend = obj.getAttribute("xend");
 		var yend = obj.getAttribute("yend");
-		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
-		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+		var passResult = obj.getAttribute("passResult");
+
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
+		if(passResult === "Complete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
+		} else if(passResult === "Incomplete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+		} else {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
+		}
+
+		$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
 
 		if (qDSelectedVal !== "" && qDSelectedVal !== "all") {		
 			if (filtersDown) {
@@ -181,8 +244,7 @@ function filter() {
 					$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
 					$("#" + xend + "-" + yend).attr('class', 'flex-item');
 				}
-			}
-			else {
+			} else {
 				//check quarters
 				var quarterFilter = obj.getAttribute("quarter");
 				if (quarterFilter !== qDSelectedVal) {
