@@ -48,6 +48,9 @@ $(document).ready(function() {
 		if (pass.hasOwnProperty('Receive Y')) {
 			p.attr("yend", pass["Receive Y"]);
 		}
+		if (pass.hasOwnProperty('Result of pass')) {
+			p.attr("passResult", pass["Result of pass"]);
+		}
 		p.attr("PassNumber", i);
 		
 		p.append("Pass #: " + (i+1) + "<br>");
@@ -75,8 +78,15 @@ $(document).ready(function() {
 		var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
 		absoluteDistance = Math.round(absoluteDistance*100)/100;
 
-		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
-		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
+		var passResult = pass["Result of pass"];
+		if(passResult === "Complete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
+		} else if(passResult === "Incomplete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+		} else {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
+		}
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
 
 
 		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
@@ -116,7 +126,7 @@ $(document).ready(function() {
 					"YAC: "							+ yac 		+ "<br>" + 
 					"<a href=\"https://www.youtube.com/watch?v=IFfLCuHSZ-U\">Test link do not click death</a>" + 
 					"</p></div>";
-		
+
 		html = styling;
 		html += content;
 
@@ -161,8 +171,18 @@ function filter() {
 		var ystart = obj.getAttribute("ystart");
 		var xend = obj.getAttribute("xend");
 		var yend = obj.getAttribute("yend");
-		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-r');
-		$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+		var passResult = obj.getAttribute("passResult");
+
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
+		if(passResult === "Complete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
+		} else if(passResult === "Incomplete") {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+		} else {
+			$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
+		}
+
+		$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
 
 		if (qDSelectedVal !== "" && qDSelectedVal !== "all") {		
 			if (filtersDown) {
@@ -173,8 +193,7 @@ function filter() {
 					$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
 					$("#" + xend + "-" + yend).attr('class', 'flex-item');
 				}
-			}
-			else {
+			} else {
 				//check quarters
 				var quarterFilter = obj.getAttribute("quarter");
 				if (quarterFilter !== qDSelectedVal) {
