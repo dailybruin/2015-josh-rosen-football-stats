@@ -252,13 +252,19 @@ jsPlumb.ready(function() {
 	establishedConnections = true;
 	drawConnections();
 
-	
+
 	$(window).resize(function() {
 		console.log("Resizing window");
 
 		if(establishedConnections)
 		{
-			jsPlumb.detachEveryConnection();
+			// jsPlumb.detachEveryConnection();
+			// jsPlumb.setSuspendDrawing(true);
+			// drawConnections();
+			jsPlumb.repaintEverything();
+			// jsPlumb.setSuspendDrawing(false);
+
+			// jsPlumb.repaintEverything();
 		}
 	});
 });
