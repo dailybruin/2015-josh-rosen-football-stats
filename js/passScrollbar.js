@@ -1,3 +1,7 @@
+var connections = new Array;
+var nConnections = 0;
+var establishedConnections = false;
+
 var getPos = function(el) 
 {
     for (var lx=0, ly=0; el != null;
@@ -93,8 +97,21 @@ $(document).ready(function() {
 		p.append("<hr>");		
 		scrollbar.append(p);
 
-		createHoverBox(pass);
+		if(establishedConnections)
+		{
+			var conn = jsPlumb.connect({
+				source:xend + "-" + yend,
+				target:xstart + "-" + ystart,
+				connector:["Bezier", {curviness: 20}],
+				endpoint:"Blank"
+			});
 
+			nConnections++;
+			connections.push(conn);	
+		}
+
+		createHoverBox(pass);
+		// On mouseover of a receive point, show hoverbox
 		$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
 			var hid = "#" + this.id + "hbox";
 
@@ -104,43 +121,6 @@ $(document).ready(function() {
 			$(hid).css('top', pos.y + "px");
 			$(hid).css('left', pos.x + "px");
 			$(hid).show();
-		});
-
-	    // Add a hoverbox to html on hoverover of div 
-		$("#bob").mouseover(function() {
-			var html = "", styling = "", content = "";
-			var pass = gamePasses[2];
-
-			// Get data from JSON
-			var receiver 	= pass["Receiver"], 
-				result  	= pass["Result of pass"], 
-				ex_comp  	= pass["Extraneous Incompletions"], 
-				yac 		= pass["YAC"];
-
-			// Get coords of div the user hoverd over
-			var div 		= document.getElementById("bob"), 
-				pos 		= getPos(div);
-
-			// Define styling (coords) of hoverbox - more styling in css file
-			styling = 	"<div id=\"fred\" class=\"hoverbox\" style=\"" + 
-						"top:" + pos.y + "px; " + 
-						"left:" + pos.x + "px;" +  
-						"\">";
-
-			// Pull JSON data into hoverbox
-			content = 	"<p>" +
-						"<b>PASS DATA</b><br>" + 
-						"Receiver: "					+ receiver 	+ "<br>" + 
-						"Result: " 						+ result 	+ "<br>" + 
-						"Extraneous Incompletions: " 	+ ex_comp 	+ "<br>" + 
-						"YAC: "							+ yac 		+ "<br>" + 
-						"<a href=\"https://www.youtube.com/watch?v=IFfLCuHSZ-U\">Test link do not click death</a>" + 
-						"</p></div>";
-
-			html = styling;
-			html += content;
-
-	  		$("#hoverContainer").append(html);
 		});
 
 		// Hide any existing hoverboxes when mouse leaves them
@@ -265,4 +245,44 @@ function filter() {
 			}
 		}
 	});
+}
+
+
+jsPlumb.ready(function() {
+	establishedConnections = true;
+	drawConnections();
+
+	
+	$(window).resize(function() {
+		console.log("Resizing window");
+
+		if(establishedConnections)
+		{
+			jsPlumb.detachEveryConnection();
+		}
+	});
+});
+
+function drawConnections()
+{
+	var gamePasses = virginia;
+
+	for (var i = 0, len = gamePasses.length; i < len; i++) {
+		var pass = gamePasses[i];
+		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
+		var xend = pass["Receive X"], yend = pass["Receive Y"];
+
+		var start = xstart + "-" + ystart,
+			end = xend + "-" + yend;
+
+		var conn = jsPlumb.connect({
+				source:start,
+				target:end,
+				connector:["Bezier", {curviness: 15}],
+				endpoint:"Blank"
+			});
+
+		nConnections++;
+		connections.push(conn);
+	}
 }
