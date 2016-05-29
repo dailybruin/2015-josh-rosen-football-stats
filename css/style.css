@@ -102,3 +102,10 @@ select {
 select::-ms-expand { /* for IE 11 */
     display: none;
 }
+
+.lineLabel {
+	margin-left: 20px;
+	margin-bottom: 20px;
+	font-weight:bold;
+	background-color: red;
+}

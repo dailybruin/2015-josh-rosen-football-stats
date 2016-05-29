@@ -1,6 +1,7 @@
 var connections = new Array;
 var nConnections = 0;
 var establishedConnections = false;
+var wroteDots = false;
 
 var getPos = function(el) 
 {
@@ -97,17 +98,20 @@ $(document).ready(function() {
 		p.append("<hr>");		
 		scrollbar.append(p);
 
-		if(establishedConnections)
+		if (establishedConnections)
 		{
-			var conn = jsPlumb.connect({
-				source:xend + "-" + yend,
-				target:xstart + "-" + ystart,
-				connector:["Bezier", {curviness: 20}],
-				endpoint:"Blank"
-			});
+			var start = xstart + "-" + ystart,
+				end = xend + "-" + yend;
 
-			nConnections++;
-			connections.push(conn);	
+			jsPlumb.connect({
+				source:start,
+				target:end,
+				connector:["Bezier", {curviness: 15}],
+				endpoint:"Blank",
+				overlays:[
+    				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
+  				] 
+			});
 		}
 
 		createHoverBox(pass);
@@ -115,12 +119,16 @@ $(document).ready(function() {
 		$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
 			var hid = "#" + this.id + "hbox";
 
+			console.log("Hover over " + this.id);
 			var receivePt = document.getElementById(this.id);
 			pos = getPos(receivePt);
 
 			$(hid).css('top', pos.y + "px");
 			$(hid).css('left', pos.x + "px");
 			$(hid).show();
+
+			var lid = "#" + this.id + "label";
+			// $('#').hide();
 		});
 
 		// Hide any existing hoverboxes when mouse leaves them
@@ -129,7 +137,13 @@ $(document).ready(function() {
 		$("#hoverContainer").on("mouseleave", ".hoverbox", function() {
 		   $(this).hide(); 
 		});
+
+		if (i == len - 1)
+			wroteDots = true;
 	}
+	
+	// if(establishedConnections && wroteDots)
+	// 	drawConnections();
 });
 
 function createHoverBox(pass) {
@@ -250,22 +264,22 @@ function filter() {
 
 jsPlumb.ready(function() {
 	establishedConnections = true;
-	drawConnections();
 
+	jsPlumb.bind("connection", function(info) {
+   		nConnections++;
+		connections.push(info.connection);
+		info.connection.hideOverlay("label");
+
+		// if (info.targetId == "0-0")
+		// {
+		// 	console.log("YEE");
+  //  			info.connection.hideOverlay("label");
+		// }
+	});
 
 	$(window).resize(function() {
-		console.log("Resizing window");
-
 		if(establishedConnections)
-		{
-			// jsPlumb.detachEveryConnection();
-			// jsPlumb.setSuspendDrawing(true);
-			// drawConnections();
 			jsPlumb.repaintEverything();
-			// jsPlumb.setSuspendDrawing(false);
-
-			// jsPlumb.repaintEverything();
-		}
 	});
 });
 
@@ -281,14 +295,15 @@ function drawConnections()
 		var start = xstart + "-" + ystart,
 			end = xend + "-" + yend;
 
-		var conn = jsPlumb.connect({
+		var connection;
+		connection = jsPlumb.connect({
 				source:start,
 				target:end,
 				connector:["Bezier", {curviness: 15}],
-				endpoint:"Blank"
+				endpoint:"Blank",
+				overlays:[
+    				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
+  				] 
 			});
-
-		nConnections++;
-		connections.push(conn);
 	}
 }
