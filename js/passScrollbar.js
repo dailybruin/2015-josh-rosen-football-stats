@@ -1,7 +1,7 @@
 var connections = new Array;
 var nConnections = 0;
 var establishedConnections = false;
-var wroteDots = false;
+var idMap = {};
 
 var getPos = function(el) 
 {
@@ -98,11 +98,11 @@ $(document).ready(function() {
 		p.append("<hr>");		
 		scrollbar.append(p);
 
-		if (establishedConnections)
-		{
-			var start = xstart + "-" + ystart,
+		var start = xstart + "-" + ystart,
 				end = xend + "-" + yend;
 
+		if (establishedConnections)
+		{
 			jsPlumb.connect({
 				source:start,
 				target:end,
@@ -118,8 +118,6 @@ $(document).ready(function() {
 		// On mouseover of a receive point, show hoverbox
 		$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
 			var hid = "#" + this.id + "hbox";
-
-			console.log("Hover over " + this.id);
 			var receivePt = document.getElementById(this.id);
 			pos = getPos(receivePt);
 
@@ -127,23 +125,32 @@ $(document).ready(function() {
 			$(hid).css('left', pos.x + "px");
 			$(hid).show();
 
-			var lid = "#" + this.id + "label";
-			// $('#').hide();
+			var id = idMap[this.id];
+			connections[id].showOverlay("label");
 		});
 
 		// Hide any existing hoverboxes when mouse leaves them
 			// DO NOT change from on function - need to use on because it binds the handler hoverContainer
 			// Cannot bind to dynamically generated hoverboxes before they exist
 		$("#hoverContainer").on("mouseleave", ".hoverbox", function() {
-		   $(this).hide(); 
-		});
+			$(this).hide(); 
 
-		if (i == len - 1)
-			wroteDots = true;
+		   	// Extract id of pass receive point
+		   	var hid, pid, pos;
+		   	hid = $(this).attr('id');
+		   	pos = hid.indexOf("hbox");
+
+		   	if (pos != -1)
+		   	{
+				pid = hid.substring(0, hid.indexOf("hbox"));
+
+				// Hide connection mapped to receive point
+				var conn = connections[idMap[pid]];
+				conn.hideOverlay("label");
+		   	}
+		});
 	}
 	
-	// if(establishedConnections && wroteDots)
-	// 	drawConnections();
 });
 
 function createHoverBox(pass) {
@@ -266,15 +273,10 @@ jsPlumb.ready(function() {
 	establishedConnections = true;
 
 	jsPlumb.bind("connection", function(info) {
+		idMap[info.connection.target.id] = nConnections;	// Map id of endpoint to connection 
    		nConnections++;
 		connections.push(info.connection);
 		info.connection.hideOverlay("label");
-
-		// if (info.targetId == "0-0")
-		// {
-		// 	console.log("YEE");
-  //  			info.connection.hideOverlay("label");
-		// }
 	});
 
 	$(window).resize(function() {
