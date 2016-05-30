@@ -104,6 +104,7 @@ select::-ms-expand { /* for IE 11 */
 }
 
 .lineLabel {
+	z-index: 10;
 	margin-left: 20px;
 	margin-bottom: 20px;
 	font-weight:bold;
