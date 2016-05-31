@@ -1,6 +1,7 @@
 var connections = new Array;
 var nConnections = 0;
 var establishedConnections = false;
+var docReady = false;
 var idMap = {};
 
 var getPos = function(el) 
@@ -101,19 +102,19 @@ $(document).ready(function() {
 		var start = xstart + "-" + ystart,
 				end = xend + "-" + yend;
 
-		if (establishedConnections)
-		{
-			jsPlumb.connect({
-				source:start,
-				target:end,
-				connector:["Bezier", {curviness: 15}],
-				endpoint:"Blank",
-				paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
-				overlays:[
-    				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
-  				] 
-			});
-		}
+		// if (establishedConnections)
+		// {
+			// jsPlumb.connect({
+			// 	source:start,
+			// 	target:end,
+			// 	connector:["Bezier", {curviness: 15}],
+			// 	endpoint:"Blank",
+			// 	paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
+			// 	overlays:[
+   //  				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
+  	// 			] 
+			// });
+		// }
 
 		createHoverBox(pass);
 		// On mouseover of a receive point, show hoverbox
@@ -153,7 +154,18 @@ $(document).ready(function() {
 		   	}
 		});
 	}
-	
+	docReady = true;
+
+	jsPlumb.ready(function() {
+		establishedConnections = true;
+		drawConnections();
+
+		$(window).resize(function() {
+			if(establishedConnections)
+				jsPlumb.repaintEverything();
+		});
+	});
+
 });
 
 function createHoverBox(pass) {
@@ -271,45 +283,36 @@ function filter() {
 	});
 }
 
+function drawConnections()
+{
+	var gamePasses = virginia;
 
-jsPlumb.ready(function() {
-	establishedConnections = true;
+	for (var i = 0, len = gamePasses.length; i < len; i++) {
+		var pass = gamePasses[i];
+		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
+		var xend = pass["Receive X"], yend = pass["Receive Y"];
 
-	jsPlumb.bind("connection", function(info) {
-		idMap[info.connection.target.id] = nConnections;	// Map id of endpoint to connection 
-   		nConnections++;
-		connections.push(info.connection);
-		info.connection.hideOverlay("label");
-	});
+		var start = xstart + "-" + ystart,
+			end = xend + "-" + yend;
 
-	$(window).resize(function() {
-		if(establishedConnections)
-			jsPlumb.repaintEverything();
-	});
-});
+		var conn = jsPlumb.connect({
+			source:start,
+			target:end,
+			connector:["Bezier", {curviness: 15}],
+			endpoint:"Blank",
+			paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
+			overlays:[
+				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
+				] 
+		});
 
-// function drawConnections()
-// {
-// 	var gamePasses = virginia;
-
-// 	for (var i = 0, len = gamePasses.length; i < len; i++) {
-// 		var pass = gamePasses[i];
-// 		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
-// 		var xend = pass["Receive X"], yend = pass["Receive Y"];
-
-// 		var start = xstart + "-" + ystart,
-// 			end = xend + "-" + yend;
-
-// 		var connection;
-// 		connection = jsPlumb.connect({
-// 				source:start,
-// 				target:end,
-// 				connector:["Bezier", {curviness: 15}],
-// 				endpoint:"Blank",
-// 				paintStyle:{strokeStyle:"red", dashstyle:"2 4 4 2", lineWidth:4},
-// 				overlays:[
-//     				[ "Label", {label:"DOO", id:"label", cssClass:"lineLabel"}]
-//   				] 
-// 			});
-// 	}
-// }
+		if (typeof conn != 'undefined')
+		{
+			console.log("binding connection");
+			idMap[conn.target.id] = nConnections;	// Map id of endpoint to connection 
+	   		nConnections++;
+			connections.push(conn);
+			conn.hideOverlay("label");
+		}
+	}
+}
