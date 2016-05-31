@@ -108,6 +108,7 @@ $(document).ready(function() {
 				target:end,
 				connector:["Bezier", {curviness: 15}],
 				endpoint:"Blank",
+				paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
 				overlays:[
     				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
   				] 
@@ -126,7 +127,9 @@ $(document).ready(function() {
 			$(hid).show();
 
 			var id = idMap[this.id];
-			connections[id].showOverlay("label");
+
+			if (typeof connections[id] != 'undefined')
+				connections[id].showOverlay("label");
 		});
 
 		// Hide any existing hoverboxes when mouse leaves them
@@ -285,27 +288,28 @@ jsPlumb.ready(function() {
 	});
 });
 
-function drawConnections()
-{
-	var gamePasses = virginia;
+// function drawConnections()
+// {
+// 	var gamePasses = virginia;
 
-	for (var i = 0, len = gamePasses.length; i < len; i++) {
-		var pass = gamePasses[i];
-		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
-		var xend = pass["Receive X"], yend = pass["Receive Y"];
+// 	for (var i = 0, len = gamePasses.length; i < len; i++) {
+// 		var pass = gamePasses[i];
+// 		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
+// 		var xend = pass["Receive X"], yend = pass["Receive Y"];
 
-		var start = xstart + "-" + ystart,
-			end = xend + "-" + yend;
+// 		var start = xstart + "-" + ystart,
+// 			end = xend + "-" + yend;
 
-		var connection;
-		connection = jsPlumb.connect({
-				source:start,
-				target:end,
-				connector:["Bezier", {curviness: 15}],
-				endpoint:"Blank",
-				overlays:[
-    				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
-  				] 
-			});
-	}
-}
+// 		var connection;
+// 		connection = jsPlumb.connect({
+// 				source:start,
+// 				target:end,
+// 				connector:["Bezier", {curviness: 15}],
+// 				endpoint:"Blank",
+// 				paintStyle:{strokeStyle:"red", dashstyle:"2 4 4 2", lineWidth:4},
+// 				overlays:[
+//     				[ "Label", {label:"DOO", id:"label", cssClass:"lineLabel"}]
+//   				] 
+// 			});
+// 	}
+// }
