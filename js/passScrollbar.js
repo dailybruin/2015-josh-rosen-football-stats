@@ -58,6 +58,7 @@ $(document).ready(function() {
 			p.attr("passResult", pass["Result of pass"]);
 		}
 		p.attr("PassNumber", i);
+		p.attr("Game", "Virginia");
 		
 		p.append("Pass #: " + (i+1) + "<br>");
 		
@@ -218,6 +219,10 @@ $('#playTypeFilter').change(function() {
 	filter();
 });
 
+$('#gameFilter').change(function() {
+	filter();
+});
+
 function filter() {
 	var scrollbar = $("#passScrollbar");
 	
@@ -231,6 +236,10 @@ function filter() {
 	///////////////////////////////////////// play type filter
 	var pTFilter = $("#playTypeFilter");
 	var pTSelectedVal = pTFilter.find(":selected").val();
+	
+	///////////////////////////////////////// game filter
+	var gFilter = $("#gameFilter");
+	var gSelectedVal = gFilter.find(":selected").val();
 
 	$('.pass').each(function(i, obj) {
 		$(obj).show();
@@ -275,6 +284,16 @@ function filter() {
 			//check play type
 			var playTypeFilter = obj.getAttribute("playType");
 			if (playTypeFilter !== pTSelectedVal) {
+				$(obj).hide();
+				$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
+				$("#" + xend + "-" + yend).attr('class', 'flex-item');
+			}
+		}
+		
+		if (gSelectedVal !== "" && gSelectedVal !== "all") {
+			//check game
+			var gameFilter = obj.getAttribute("Game");
+			if (gameFilter !== gSelectedVal) {
 				$(obj).hide();
 				$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
 				$("#" + xend + "-" + yend).attr('class', 'flex-item');
