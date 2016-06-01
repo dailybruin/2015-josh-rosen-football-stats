@@ -24,155 +24,159 @@ $(document).ready(function() {
 	}
 
 	var scrollbar = $("#passScrollbar");
-	var gamePasses = virginia;
+	var gamePasses = [virginia, arizona];
+	var gameNames = ["Virginia", "Arizona"];
+
 	
 	scrollbar.html("");	//clear the scrollbar
-
-	for (var i = 0, len = gamePasses.length; i < len; i++) {
-		var pass = gamePasses[i];
-		var p = $('<div class="pass"></div>');
+	for (var i = 0, len1 = gamePasses.length; i < len1; i++) {
+		for (var j = 0, len2 = gamePasses[i].length; j < len2; j++) {
+			var pass = gamePasses[i][j];
+			var p = $('<div class="pass"></div>');
 		
-		//initialize data-attrs for filter
-		if (pass.hasOwnProperty('Down')) {
-			p.attr("down", pass["Down"]);
-		}
-		if (pass.hasOwnProperty('Qtr.')) {
-			p.attr("quarter", pass["Qtr."]);
-		}
-		if (pass.hasOwnProperty('Play type')) {
-			p.attr("playType", pass["Play type"]);
-		}
-		if (pass.hasOwnProperty('Pass X')) {
-			p.attr("xstart", pass["Pass X"]);
-		}
-		if (pass.hasOwnProperty('Pass Y')) {
-			p.attr("ystart", pass["Pass Y"]);
-		}
-		if (pass.hasOwnProperty('Receive X')) {
-			p.attr("xend", pass["Receive X"]);
-		}
-		if (pass.hasOwnProperty('Receive Y')) {
-			p.attr("yend", pass["Receive Y"]);
-		}
-		if (pass.hasOwnProperty('Result of pass')) {
-			p.attr("passResult", pass["Result of pass"]);
-		}
-		p.attr("PassNumber", i);
-		p.attr("Game", "Virginia");
-		
-		var leftDiv = $('<div class="leftPass">' + (i+1) + '</div>');
-		var rightDiv = $('<div class="rightPass"></div>');
-		
-		var requiredKeys = {
-			"Qtr.": false, 
-			"Down": false, 
-			"Distance": false, 
-			"Play type": false, 
-			"Result of pass": false, 
-			"Receiver": false, 
-			"Yards": false,
-			"Distance Of Pass": false,
-			"Play notes": true
-		};
-		
-		for (var key in pass) {
-			if (key in requiredKeys && requiredKeys[key]) {
-				//rightDiv.append(key + ": " + pass[key] + "<br>");
-				rightDiv.append(pass[key]);
+			//initialize data-attrs for filter
+			if (pass.hasOwnProperty('Down')) {
+				p.attr("down", pass["Down"]);
 			}
+			if (pass.hasOwnProperty('Qtr.')) {
+				p.attr("quarter", pass["Qtr."]);
+			}
+			if (pass.hasOwnProperty('Play type')) {
+				p.attr("playType", pass["Play type"]);
+			}
+			if (pass.hasOwnProperty('Pass X')) {
+				p.attr("xstart", pass["Pass X"]);
+			}
+			if (pass.hasOwnProperty('Pass Y')) {
+				p.attr("ystart", pass["Pass Y"]);
+			}
+			if (pass.hasOwnProperty('Receive X')) {
+				p.attr("xend", pass["Receive X"]);
+			}
+			if (pass.hasOwnProperty('Receive Y')) {
+				p.attr("yend", pass["Receive Y"]);
+			}
+			if (pass.hasOwnProperty('Result of pass')) {
+				p.attr("passResult", pass["Result of pass"]);
+			}
+			p.attr("PassNumber", j);
+			p.attr("Game", gameNames[i]);
+		
+			var leftDiv = $('<div class="leftPass">' + (j+1) + '</div>');
+			var rightDiv = $('<div class="rightPass"></div>');
+		
+			var requiredKeys = {
+				"Qtr.": false, 
+				"Down": false, 
+				"Distance": false, 
+				"Play type": false, 
+				"Result of pass": false, 
+				"Receiver": false, 
+				"Yards": false,
+				"Distance Of Pass": false,
+				"Play notes": true
+			};
+		
+			for (var key in pass) {
+				if (key in requiredKeys && requiredKeys[key]) {
+					//rightDiv.append(key + ": " + pass[key] + "<br>");
+					rightDiv.append(pass[key]);
+				}
+			}
+		
+			var height = rightDiv.html().length + 30;
+		
+			leftDiv.css("float", "left");
+			leftDiv.css("width", "2vw");
+			leftDiv.css("height", height + "px");
+			leftDiv.css("border-bottom", "solid 2px");
+			leftDiv.css("border-right", "solid 2px");
+			leftDiv.css("margin-right", "5px");
+		
+			rightDiv.css("height", height + "px");
+			rightDiv.css("border-bottom", "solid 2px");
+		
+			p.append(leftDiv);
+			p.append(rightDiv);
+		
+		
+			var xstart = pass["Pass X"], ystart = pass["Pass Y"];
+			var xend = pass["Receive X"], yend = pass["Receive Y"];
+			//Calculate absolute distance of pass
+			var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
+			absoluteDistance = Math.round(absoluteDistance*100)/100;
+
+			var passResult = pass["Result of pass"];
+			if(passResult === "Complete") {
+				$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
+			} else if(passResult === "Incomplete") {
+				$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
+			} else {
+				$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
+			}
+
+			$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
+
+			//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");		
+			scrollbar.append(p);
+
+			var start = xstart + "-" + ystart,
+					end = xend + "-" + yend;
+
+			// if (establishedConnections)
+			// {
+				// jsPlumb.connect({
+				// 	source:start,
+				// 	target:end,
+				// 	connector:["Bezier", {curviness: 15}],
+				// 	endpoint:"Blank",
+				// 	paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
+				// 	overlays:[
+	   //  				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
+		// 			] 
+				// });
+			// }
+
+			createHoverBox(pass);
+			// On mouseover of a receive point, show hoverbox
+			$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
+				var hid = "#" + this.id + "hbox";
+				var receivePt = document.getElementById(this.id);
+				pos = getPos(receivePt);
+
+				$(hid).css('top', pos.y + "px");
+				$(hid).css('left', pos.x + "px");
+				$(hid).show();
+
+				var id = idMap[this.id];
+
+				if (typeof connections[id] != 'undefined')
+					connections[id].showOverlay("label");
+			});
+
+			// Hide any existing hoverboxes when mouse leaves them
+				// DO NOT change from on function - need to use on because it binds the handler hoverContainer
+				// Cannot bind to dynamically generated hoverboxes before they exist
+			$("#hoverContainer").on("mouseleave", ".hoverbox", function() {
+				$(this).hide(); 
+
+				// Extract id of pass receive point
+				var hid, pid, pos;
+				hid = $(this).attr('id');
+				pos = hid.indexOf("hbox");
+
+				if (pos != -1)
+				{
+					pid = hid.substring(0, hid.indexOf("hbox"));
+
+					// Hide connection mapped to receive point
+					var conn = connections[idMap[pid]];
+					conn.hideOverlay("label");
+				}
+			});
 		}
-		
-		var height = rightDiv.html().length + 30;
-		
-		leftDiv.css("float", "left");
-		leftDiv.css("width", "2vw");
-		leftDiv.css("height", height + "px");
-		leftDiv.css("border-bottom", "solid 2px");
-		leftDiv.css("border-right", "solid 2px");
-		leftDiv.css("margin-right", "5px");
-		
-		rightDiv.css("height", height + "px");
-		rightDiv.css("border-bottom", "solid 2px");
-		
-		p.append(leftDiv);
-		p.append(rightDiv);
-		
-		
-		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
-		var xend = pass["Receive X"], yend = pass["Receive Y"];
-		//Calculate absolute distance of pass
-		var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
-		absoluteDistance = Math.round(absoluteDistance*100)/100;
-
-		var passResult = pass["Result of pass"];
-		if(passResult === "Complete") {
-			$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
-		} else if(passResult === "Incomplete") {
-			$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
-		} else {
-			$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
-		}
-
-		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
-
-		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");		
-		scrollbar.append(p);
-
-		var start = xstart + "-" + ystart,
-				end = xend + "-" + yend;
-
-		// if (establishedConnections)
-		// {
-			// jsPlumb.connect({
-			// 	source:start,
-			// 	target:end,
-			// 	connector:["Bezier", {curviness: 15}],
-			// 	endpoint:"Blank",
-			// 	paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
-			// 	overlays:[
-   //  				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
-  	// 			] 
-			// });
-		// }
-
-		createHoverBox(pass);
-		// On mouseover of a receive point, show hoverbox
-		$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
-			var hid = "#" + this.id + "hbox";
-			var receivePt = document.getElementById(this.id);
-			pos = getPos(receivePt);
-
-			$(hid).css('top', pos.y + "px");
-			$(hid).css('left', pos.x + "px");
-			$(hid).show();
-
-			var id = idMap[this.id];
-
-			if (typeof connections[id] != 'undefined')
-				connections[id].showOverlay("label");
-		});
-
-		// Hide any existing hoverboxes when mouse leaves them
-			// DO NOT change from on function - need to use on because it binds the handler hoverContainer
-			// Cannot bind to dynamically generated hoverboxes before they exist
-		$("#hoverContainer").on("mouseleave", ".hoverbox", function() {
-			$(this).hide(); 
-
-		   	// Extract id of pass receive point
-		   	var hid, pid, pos;
-		   	hid = $(this).attr('id');
-		   	pos = hid.indexOf("hbox");
-
-		   	if (pos != -1)
-		   	{
-				pid = hid.substring(0, hid.indexOf("hbox"));
-
-				// Hide connection mapped to receive point
-				var conn = connections[idMap[pid]];
-				conn.hideOverlay("label");
-		   	}
-		});
 	}
+		
 	docReady = true;
 
 	jsPlumb.ready(function() {
