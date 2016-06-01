@@ -30,7 +30,7 @@ $(document).ready(function() {
 
 	for (var i = 0, len = gamePasses.length; i < len; i++) {
 		var pass = gamePasses[i];
-		var p = $('<p class="pass"></p>');
+		var p = $('<div class="pass"></div>');
 		
 		//initialize data-attrs for filter
 		if (pass.hasOwnProperty('Down')) {
@@ -60,7 +60,8 @@ $(document).ready(function() {
 		p.attr("PassNumber", i);
 		p.attr("Game", "Virginia");
 		
-		p.append("Pass #: " + (i+1) + "<br>");
+		var leftDiv = $('<div class="leftPass">' + (i+1) + '</div>');
+		var rightDiv = $('<div class="rightPass"></div>');
 		
 		var requiredKeys = {
 			"Qtr.": false, 
@@ -75,9 +76,27 @@ $(document).ready(function() {
 		};
 		
 		for (var key in pass) {
-			if (key in requiredKeys && requiredKeys[key])
-				p.append(key + ": " + pass[key] + "<br>");
+			if (key in requiredKeys && requiredKeys[key]) {
+				//rightDiv.append(key + ": " + pass[key] + "<br>");
+				rightDiv.append(pass[key]);
+			}
 		}
+		
+		var height = rightDiv.html().length + 30;
+		
+		leftDiv.css("float", "left");
+		leftDiv.css("width", "2vw");
+		leftDiv.css("height", height + "px");
+		leftDiv.css("border-bottom", "solid 2px");
+		leftDiv.css("border-right", "solid 2px");
+		leftDiv.css("margin-right", "5px");
+		
+		rightDiv.css("height", height + "px");
+		rightDiv.css("border-bottom", "solid 2px");
+		
+		p.append(leftDiv);
+		p.append(rightDiv);
+		
 		
 		var xstart = pass["Pass X"], ystart = pass["Pass Y"];
 		var xend = pass["Receive X"], yend = pass["Receive Y"];
@@ -96,8 +115,7 @@ $(document).ready(function() {
 
 		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
 
-		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");
-		p.append("<hr>");		
+		//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");		
 		scrollbar.append(p);
 
 		var start = xstart + "-" + ystart,
