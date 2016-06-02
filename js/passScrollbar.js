@@ -3,6 +3,7 @@ var nConnections = 0;
 var establishedConnections = false;
 var docReady = false;
 var idMap = {};
+var passReceiveMap = {};
 
 var getPos = function(el) 
 {
@@ -123,25 +124,26 @@ $(document).ready(function() {
 			var start = xstart + "-" + ystart,
 					end = xend + "-" + yend;
 
-			// if (establishedConnections)
-			// {
-				// jsPlumb.connect({
-				// 	source:start,
-				// 	target:end,
-				// 	connector:["Bezier", {curviness: 15}],
-				// 	endpoint:"Blank",
-				// 	paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
-				// 	overlays:[
-	   //  				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
-		// 			] 
-				// });
-			// }
-
 			createHoverBox(pass);
+
+			passReceiveMap[xstart + "-" + ystart] = xend + "-" + yend; // Map start pt id to receive pt id
+
 			// On mouseover of a receive point, show hoverbox
 			$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
-				var hid = "#" + this.id + "hbox";
-				var receivePt = document.getElementById(this.id);
+				var hid, receivePt;
+
+				if (document.getElementById(this.id + "hbox"))	// Hovered over a receive pt
+				{
+					hid = "#" + this.id + "hbox";
+					receivePt = document.getElementById(this.id);
+				}
+				else 											// Hovered over a pass pt
+				{
+					var rid = passReceiveMap[this.id];
+					hid = "#" + rid + "hbox";
+					receivePt = document.getElementById(rid);
+				}
+				
 				pos = getPos(receivePt);
 
 				$(hid).css('top', pos.y + "px");
@@ -152,6 +154,15 @@ $(document).ready(function() {
 
 				if (typeof connections[id] != 'undefined')
 					connections[id].showOverlay("label");
+			});
+
+			$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseleave(function() {
+				if (!document.getElementById(this.id + "hbox"))	// If this is a pass location pt
+				{
+					var rid = passReceiveMap[this.id];
+					hid = "#" + rid + "hbox";
+					$(hid).hide();
+				}
 			});
 
 			// Hide any existing hoverboxes when mouse leaves them
