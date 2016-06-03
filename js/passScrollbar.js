@@ -130,27 +130,20 @@ $(document).ready(function() {
 
 			// On mouseover of a receive point, show hoverbox
 			$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
-				var hid, receivePt;
+				var hid, rid, receivePt;
 
-				if (document.getElementById(this.id + "hbox"))	// Hovered over a receive pt
-				{
-					hid = "#" + this.id + "hbox";
-					receivePt = document.getElementById(this.id);
-				}
-				else 											// Hovered over a pass pt
-				{
-					var rid = passReceiveMap[this.id];
-					hid = "#" + rid + "hbox";
-					receivePt = document.getElementById(rid);
-				}
-				
+				rid = (document.getElementById(this.id + "hbox")) ? this.id : passReceiveMap[this.id];
+
+				hid = "#" + rid + "hbox";
+				receivePt = document.getElementById(rid);
+
 				pos = getPos(receivePt);
 
 				$(hid).css('top', pos.y + "px");
 				$(hid).css('left', pos.x + "px");
 				$(hid).show();
 
-				var id = idMap[this.id];
+				var id = idMap[rid];
 
 				if (typeof connections[id] != 'undefined')
 					connections[id].showOverlay("label");
@@ -162,6 +155,9 @@ $(document).ready(function() {
 					var rid = passReceiveMap[this.id];
 					hid = "#" + rid + "hbox";
 					$(hid).hide();
+
+					var conn = connections[idMap[rid]];
+					conn.hideOverlay("label");
 				}
 			});
 
@@ -347,6 +343,14 @@ function drawConnections()
 		var start = xstart + "-" + ystart,
 			end = xend + "-" + yend;
 
+		var label_txt = "";
+		// Calculate pythagorean distance of pass 
+		if (pass.hasOwnProperty('Pass X') && pass.hasOwnProperty('Pass Y') && pass.hasOwnProperty('Receive X') && pass.hasOwnProperty('Receive Y')) 
+		{
+			var dist = Math.round( Math.sqrt( Math.pow(xstart - xend, 2) + Math.pow(ystart - yend, 2) ) * 10 ) / 10;
+			label_txt = "Pass Distance: " + dist + " yards";
+		}
+		
 		var conn = jsPlumb.connect({
 			source:start,
 			target:end,
@@ -354,7 +358,7 @@ function drawConnections()
 			endpoint:"Blank",
 			paintStyle:{strokeStyle:"#46505A", dashstyle:"1 2", lineWidth:4},
 			overlays:[
-				[ "Label", {label:"FOO", id:"label", cssClass:"lineLabel"}]
+				[ "Label", {label:label_txt, id:"label", cssClass:"lineLabel"}]
 				] 
 		});
 
