@@ -270,7 +270,7 @@ function createHoverBox(pass) {
 				"Result: " 						+ result 	+ "<br>" + 
 				"Extraneous Incompletions: " 	+ ex_comp 	+ "<br>" + 
 				"YAC: "							+ yac 		+ "<br>" + 
-				"<a href=\"https://www.youtube.com/watch?v=IFfLCuHSZ-U\">Test link do not click death</a>" + 
+				"<a target=\"_blank\" href=\"https://www.youtube.com/watch?v=IFfLCuHSZ-U\">Test link do not click death</a>" + 
 				"</p></div>";
 	
 	html = header;
