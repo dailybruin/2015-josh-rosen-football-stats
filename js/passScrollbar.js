@@ -132,7 +132,6 @@ $(document).ready(function() {
 			// On mouseover of a receive point, show hoverbox
 			$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
 				var hid, receivePt;
-				console.log(this.id);
 				if (document.getElementById(this.id + "hbox"))	// Hovered over a receive pt
 				{
 					hid = "#" + this.id + "hbox";
