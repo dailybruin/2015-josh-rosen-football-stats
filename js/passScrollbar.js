@@ -128,10 +128,11 @@ $(document).ready(function() {
 
 			passReceiveMap[xstart + "-" + ystart] = xend + "-" + yend; // Map start pt id to receive pt id
 
+
 			// On mouseover of a receive point, show hoverbox
 			$('.flex-item-r, .flex-item-o, .flex-item-lg').mouseover(function() {
 				var hid, receivePt;
-
+				console.log(this.id);
 				if (document.getElementById(this.id + "hbox"))	// Hovered over a receive pt
 				{
 					hid = "#" + this.id + "hbox";
@@ -199,8 +200,55 @@ $(document).ready(function() {
 				jsPlumb.repaintEverything();
 		});
 	});
+	
+	createPassHoverListener();
+	filter();
 
 });
+
+function createPassHoverListener() {
+	$('.pass').mouseover(function() {
+		var curObj = $(this);
+		var hid, receivePt;
+		
+		var hboxid = curObj.attr("xstart") + "-" + curObj.attr("ystart");
+
+		if (document.getElementById(hboxid + "hbox"))	// Hovered over a receive pt
+		{
+			hid = "#" + hboxid + "hbox";
+			receivePt = document.getElementById(hboxid);
+		}
+		else 											// Hovered over a pass pt
+		{
+			var rid = passReceiveMap[hboxid];
+			hid = "#" + rid + "hbox";
+			receivePt = document.getElementById(rid);
+		}
+		
+		pos = getPos(receivePt);
+
+		$(hid).css('top', pos.y + "px");
+		$(hid).css('left', pos.x + "px");
+		$(hid).show();
+
+		var id = idMap[hboxid];
+
+		if (typeof connections[id] != 'undefined')
+			connections[id].showOverlay("label");
+	});
+
+	$('.pass').mouseleave(function() {
+		var curObj = $(this);
+		var hboxid = curObj.attr("xstart") + "-" + curObj.attr("ystart");
+		
+		if (!document.getElementById(hboxid + "hbox"))	// If this is a pass location pt
+		{
+			var rid = passReceiveMap[hboxid];
+			hid = "#" + rid + "hbox";
+			$(hid).hide();
+		}
+	});
+}
 
 function createHoverBox(pass) {
 	var html = "", header = "", content = "";
@@ -282,7 +330,7 @@ function filter() {
 		var yend = obj.getAttribute("yend");
 		var passResult = obj.getAttribute("passResult");
 
-		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
+		//$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
 		if(passResult === "Complete") {
 			$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
 		} else if(passResult === "Incomplete") {
@@ -291,7 +339,7 @@ function filter() {
 			$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
 		}
 
-		$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
+		//$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
 
 		if (qDSelectedVal !== "" && qDSelectedVal !== "all") {		
 			if (filtersDown) {
