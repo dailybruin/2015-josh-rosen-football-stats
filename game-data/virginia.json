@@ -336,27 +336,6 @@ virginia = [
     "Receive Y": -3
   },
   {
-    "Pass No.": 0,
-    "Qtr.": 2,
-    "Time": "0:50",
-    "Down": 2,
-    "Distance": 13,
-    "Territory": "Opp",
-    "Yard line": 43,
-    "Ball pos.": 0,
-    "Play type": "QB Run",
-    "Result of pass": 0,
-    "Extraneous Incompletions": 0,
-    "Receiver": 0,
-    "Yards": 0,
-    "YAC": 0,
-    "Play notes": "Rosen takes coverage sack for no gain",
-    "Pass X": 0,
-    "Pass Y": 0,
-    "Receive X": 0,
-    "Receive Y": 0
-  },
-  {
     "Pass No.": 17,
     "Qtr.": 2,
     "Time": "0:38",
