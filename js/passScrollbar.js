@@ -18,10 +18,14 @@ $(document).ready(function() {
 	for (var g = 0; g < 3654; g++){
 		var x = (g % 63) - 5;
 		var y = (46 - (Math.floor(g/63) + 1));
+		if(y <= 0) {
+			y = y-1;			
+		}
 		var p;
 		p = $('<div class="flex-item" id="' + x + "-" + y + "\"" + "> </div>");	
 		
 		field.append(p);
+
 	}
 
 	var scrollbar = $("#passScrollbar");
