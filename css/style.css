@@ -1,6 +1,13 @@
+
+/*@font-face {
+	font-family: 'Quantico-Bold';
+	src: url('fonts/Quantico-Bold.tff');
+	font-weight: bold;
+}*/
+
 #filter {
 	margin-top: 2%;
-	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+	font-family: 'Quantico';
 	width: 700px;
 }
 
@@ -8,7 +15,7 @@
 	border: 2px solid black;
 	width: 15vw;
 	height: 48vw;
-	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+	font-family: 'Quantico';
 	background-color: #007DC3;
 
 	/*margin-left: 5%;*/
@@ -96,7 +103,8 @@ select {
     color: white;
     border: 2px solid #000;
     height: 50px;
-    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    font-family: 'Quantico';
+    font-weight: bold;
 }
 
 select::-ms-expand { /* for IE 11 */
