@@ -100,6 +100,7 @@ $(document).ready(function() {
 		
 			rightDiv.css("height", height + "px");
 			rightDiv.css("border-bottom", "solid 2px");
+			rightDiv.css("font-size", "14px");
 		
 			p.append(leftDiv);
 			p.append(rightDiv);
