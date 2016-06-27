@@ -517,10 +517,16 @@ function returnMaxReceiverString(param) {
 	}
 	
 	for (var v = 0; v < maxReceivers.length-1; v++) {
+		if (maxReceivers[v] == "N/A")
+			continue;
 		maxReceiversString += maxReceivers[v];
 		maxReceiversString += ", "
 	}
-	maxReceiversString += maxReceivers[maxReceivers.length-1];
+
+	if (maxReceivers[maxReceivers.length-1] == "N/A")
+		maxReceiversString = maxReceiversString.substr(0, maxReceiversString.length-2);
+	else 
+		maxReceiversString += maxReceivers[maxReceivers.length-1];
 	maxReceiversString += (" (" + max + ")");
 	return maxReceiversString;
 }
