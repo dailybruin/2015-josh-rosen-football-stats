@@ -69,6 +69,7 @@ $(document).ready(function() {
 		
 			var leftDiv = $('<div class="leftPass">' + (j+1) + '</div>');
 			var rightDiv = $('<div class="rightPass"></div>');
+			var clearDiv = $('<div class="clearPass"></div>');
 		
 			var requiredKeys = {
 				"Qtr.": false, 
@@ -89,22 +90,22 @@ $(document).ready(function() {
 				}
 			}
 		
-			var height = rightDiv.html().length + 30;
-		
+			rightDiv.css("float", "right");
+			rightDiv.css("width", "12vw");
+			rightDiv.css("padding", "5px");
+			rightDiv.css("font-size", "14px");
+			rightDiv.css("border-left", "solid 2px");
+			
 			leftDiv.css("float", "left");
 			leftDiv.css("width", "2vw");
-			leftDiv.css("height", height + "px");
-			leftDiv.css("border-bottom", "solid 2px");
-			leftDiv.css("border-right", "solid 2px");
-			leftDiv.css("margin-right", "5px");
-		
-			rightDiv.css("height", height + "px");
-			rightDiv.css("border-bottom", "solid 2px");
-			rightDiv.css("font-size", "14px");
+			leftDiv.css("padding", "5px");
+			
+			clearDiv.css("clear", "both");
 		
 			p.append(leftDiv);
 			p.append(rightDiv);
-		
+			p.append(clearDiv);
+			p.css("border-bottom", "solid 2px");
 		
 			var xstart = pass["Pass X"], ystart = pass["Pass Y"];
 			var xend = pass["Receive X"], yend = pass["Receive Y"];
