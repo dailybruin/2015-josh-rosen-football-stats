@@ -11,6 +11,33 @@
 	width: 700px;
 }
 
+@media screen and (max-width: 1100px) {
+	.ui.horizontal.statistic>.value, .ui.horizontal.statistics .statistic>.value	{
+		font-size: 20px;
+	}
+	.ui.horizontal.statistic>.label, .ui.horizontal.statistics .statistic>.label {
+		font-size: 12px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.ui.horizontal.statistic>.value, .ui.horizontal.statistics .statistic>.value	{
+		font-size: 15px;
+	}
+	.ui.horizontal.statistic>.label, .ui.horizontal.statistics .statistic>.label {
+		font-size: 9px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.ui.horizontal.statistic>.value, .ui.horizontal.statistics .statistic>.value	{
+		font-size: 10px;
+	}
+	.ui.horizontal.statistic>.label, .ui.horizontal.statistics .statistic>.label {
+		font-size: 6px;
+	}
+}
+
 #passScrollbarContainer {
 	border: 2px solid black;
 	width: 15vw;
