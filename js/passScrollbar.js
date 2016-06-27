@@ -36,10 +36,11 @@ $(document).ready(function() {
 	scrollbar.html("");	//clear the scrollbar
 	for (var i = 0, len1 = gamePasses.length; i < len1; i++) {
 		for (var j = 0, len2 = gamePasses[i].length; j < len2; j++) {
+			//add attributes for all of the games
 			var pass = gamePasses[i][j];
 			var p = $('<div class="pass"></div>');
 		
-			//initialize data-attrs for filter
+			//initialize data attributes for filter
 			if (pass.hasOwnProperty('Down')) {
 				p.attr("down", pass["Down"]);
 			}
@@ -82,6 +83,7 @@ $(document).ready(function() {
 				"Play notes": true
 			};
 		
+			//Add each key to the pass?
 			for (var key in pass) {
 				if (key in requiredKeys && requiredKeys[key]) {
 					//rightDiv.append(key + ": " + pass[key] + "<br>");
@@ -105,15 +107,16 @@ $(document).ready(function() {
 			p.append(leftDiv);
 			p.append(rightDiv);
 		
-		
+			//Grab pass and receive location attributes of each pass
 			var xstart = pass["Pass X"], ystart = pass["Pass Y"];
 			var xend = pass["Receive X"], yend = pass["Receive Y"];
 			//Calculate absolute distance of pass
 			var absoluteDistance = Math.sqrt(Math.pow(xend-xstart,2) + Math.pow(yend-ystart,2));
 			absoluteDistance = Math.round(absoluteDistance*100)/100;
 
+			//Add pass receive location marker based on result of the pass
 			var passResult = pass["Result of pass"];
-			if(passResult === "Complete") {
+			if(passResult === "Complete") { 
 				$("#" + xend + "-" + yend).attr('class', 'flex-item-lg');
 			} else if(passResult === "Incomplete") {
 				$("#" + xend + "-" + yend).attr('class', 'flex-item-r');
@@ -121,6 +124,7 @@ $(document).ready(function() {
 				$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
 			}
 
+			//Add pass location marker
 			$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
 
 			//p.append("Distance Of Pass: " + absoluteDistance + " yards" + "<br><hr>");		
