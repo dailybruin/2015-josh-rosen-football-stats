@@ -327,6 +327,7 @@ function filter() {
 	var gFilter = $("#gameFilter");
 	var gSelectedVal = gFilter.find(":selected").val();
 
+	//show the ALL passes in the pass scroller
 	$('.pass').each(function(i, obj) {
 		$(obj).show();
 		var xstart = obj.getAttribute("xstart");
@@ -344,6 +345,7 @@ function filter() {
 			$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
 		}
 
+		$("#" + xstart + "-" + ystart).attr('class', 'flex-item-o');
 		//$("#" + xend + "-" + yend).attr('class', 'flex-item-o');
 
 		if (qDSelectedVal !== "" && qDSelectedVal !== "all") {		
@@ -383,6 +385,8 @@ function filter() {
 				$(obj).hide();
 				$("#" + xstart + "-" + ystart).attr('class', 'flex-item');
 				$("#" + xend + "-" + yend).attr('class', 'flex-item');
+			} else {
+
 			}
 		}
 	});
