@@ -2,12 +2,28 @@ $(document).ready(function() {
 	initializeGame("Virginia");
 });
 
-function initializeGame(gameValue) {
+function setGameVariable(gameValue) {
 	var game;
 	if (gameValue == "Virginia")
 		game = virginia;
 	else if (gameValue == "Arizona")
 		game = arizona;
+	return game;
+}
+
+function setPlayName(playValue) {
+	var playName = "";
+	if (playValue == "playType1")
+		playName = "Pass";
+	else if (playValue == "playType2")
+		playName = "PA Pass";
+	else 
+		playName = "Screen pass";
+	return playName;
+}
+
+function initializeGame(gameValue) {
+	var game = setGameVariable(gameValue);
 
 	var completePasses = 0;
 	var totalPasses = 0;
@@ -72,6 +88,7 @@ function initializeGame(gameValue) {
 	var adjCompletionPercentage = Math.round((completePasses + drops)/(totalPasses - extraneous) * 100);
 	var avgTPassDistance = Math.round(passDistance/totalPasses);
 	var avgOffPassDist = Math.round(offPassDis/totalPasses);
+	var maxReceiversString = returnMaxReceiverString(receivers);
 
 	document.getElementById('completePasses').innerHTML=passPercentage+'%';
 	document.getElementById('totalPasses').innerHTML=totalPasses;
@@ -82,32 +99,7 @@ function initializeGame(gameValue) {
 	document.getElementById('pythDistance').innerHTML=pDistance;
 	document.getElementById('tpDistance').innerHTML=avgTPassDistance;
 	document.getElementById('offPassDistance').innerHTML=avgOffPassDist;
-
-	var frequency = {};
-	var max = 0;
-	var result;
-	var maxReceivers = [];
-	for (var v in receivers) {
-		frequency[receivers[v]]=(frequency[receivers[v]] || 0)+1;
-		if (frequency[receivers[v]] > max) {
-			max = frequency[receivers[v]];
-		}
-	}
-	for (var v in frequency) {
-		if (frequency[v] === max) {
-			maxReceivers.push(v);
-		}
-	}
-	var maxReceiversString = "";
-	for (var v = 0; v < maxReceivers.length-1; v++) {
-		maxReceiversString += maxReceivers[v];
-		maxReceiversString += ", "
-	}
-	maxReceiversString += maxReceivers[maxReceivers.length-1];
-	maxReceiversString += (" (" + max + ")");
-
 	document.getElementById('receiver').innerHTML=maxReceiversString;
-
 }
 
 $('#quarterDownFilter').change(function() {
@@ -135,12 +127,12 @@ function filterStatsBox() {
 	var gSelectedFilter = gFilter.find(":selected")[0].id;
 	var filterByGame = (gSelectedFilter !== "");
 
-	console.log(qPSelectedId);
-
-	if (filtersQuarter) { // filter by quarter 
+	if (filtersQuarter) {
 		if (filterByPlay) {
 			console.log("Filter by Quarter + Play");
 			filterByQuarter(qDSelectedVal, qPSelectedId, gSelectedFilter);
+		} else if (qDSelectedVal == 'all') {
+			initializeGame(gSelectedFilter);
 		} else {
 			console.log("Filter by Quarter");
 			filterByQuarter(qDSelectedVal, null, gSelectedFilter);
@@ -158,17 +150,14 @@ function filterStatsBox() {
 			console.log("Filter by Play");
 			filterByPlayAlone(qPSelectedId, gSelectedFilter);
 		} else {
+			console.log("Initialize");
 			initializeGame(gSelectedFilter);
 		}
 	}
 }
 
 function filterByPlayAlone(playValue, gameValue) {
-	var game;
-	if (gameValue == "Virginia")
-		game = virginia;
-	else if (gameValue == "Arizona")
-		game = arizona;
+	var game = setGameVariable(gameValue);
 
 	var completePasses = 0;
 	var totalPasses = 0;
@@ -181,13 +170,7 @@ function filterByPlayAlone(playValue, gameValue) {
 	var standardPass = 0;
 	var offPassDis = 0; 
 
-	playName = "";
-	if (playValue == "playType1")
-		playName = "Pass";
-	else if (playValue == "playType2")
-		playName = "PA Pass";
-	else 
-		playName = "Screen pass";
+	var playName = setPlayName(playValue);
 
 	for (var i = 0; i < game.length; i++) {
 		var pass = game[i];
@@ -240,6 +223,7 @@ function filterByPlayAlone(playValue, gameValue) {
 	var pDistance = Math.round(truePassDistance/totalPasses);
 	var avgTPassDistance = Math.round(passDistance/totalPasses);
 	var avgOffPassDist = Math.round(offPassDis/totalPasses);
+	var maxReceiversString = returnMaxReceiverString(receivers);
 
 	document.getElementById('completePasses').innerHTML=passPercentage+'%';
 	document.getElementById('totalPasses').innerHTML=totalPasses;
@@ -250,40 +234,12 @@ function filterByPlayAlone(playValue, gameValue) {
 	document.getElementById('pythDistance').innerHTML=pDistance;
 	document.getElementById('tpDistance').innerHTML=avgTPassDistance;
 	document.getElementById('offPassDistance').innerHTML=avgOffPassDist;
-
-	var frequency = {};
-	var max = 0;
-	var result;
-	var maxReceivers = [];
-	for (var v in receivers) {
-		frequency[receivers[v]]=(frequency[receivers[v]] || 0)+1;
-		if (frequency[receivers[v]] > max) {
-			max = frequency[receivers[v]];
-		}
-	}
-	for (var v in frequency) {
-		if (frequency[v] === max) {
-			maxReceivers.push(v);
-		}
-	}
-	var maxReceiversString = "";
-	for (var v = 0; v < maxReceivers.length-1; v++) {
-		maxReceiversString += maxReceivers[v];
-		maxReceiversString += ", "
-	}
-	maxReceiversString += maxReceivers[maxReceivers.length-1];
-	maxReceiversString += (" (" + max + ")");
-
 	document.getElementById('receiver').innerHTML=maxReceiversString;
 }
 
 // value is the quarter number
 function filterByQuarter(value, playValue, gameValue) {
-	var game;
-	if (gameValue == "Virginia")
-		game = virginia;
-	else if (gameValue == "Arizona")
-		game = arizona;
+	var game = setGameVariable(gameValue);
 
 	var completePasses = 0;
 	var totalPasses = 0;
@@ -343,13 +299,7 @@ function filterByQuarter(value, playValue, gameValue) {
 			}
 		}
 	} else {
-		playName = "";
-		if (playValue == "playType1")
-			playName = "Pass";
-		else if (playValue == "playType2")
-			playName = "PA Pass";
-		else 
-			playName = "Screen pass";
+		var playName = setPlayName(playValue);
 
 		for (var i = 0; i < game.length; i++) {
 			var pass = game[i];
@@ -403,6 +353,7 @@ function filterByQuarter(value, playValue, gameValue) {
 	var pDistance = Math.round(truePassDistance/totalPasses);
 	var avgTPassDistance = Math.round(passDistance/totalPasses);
 	var avgOffPassDist = Math.round(offPassDis/totalPasses);
+	var maxReceiversString = returnMaxReceiverString(receivers);
 
 	document.getElementById('completePasses').innerHTML=passPercentage+'%';
 	document.getElementById('totalPasses').innerHTML=totalPasses;
@@ -413,39 +364,11 @@ function filterByQuarter(value, playValue, gameValue) {
 	document.getElementById('pythDistance').innerHTML=pDistance;
 	document.getElementById('tpDistance').innerHTML=avgTPassDistance;
 	document.getElementById('offPassDistance').innerHTML=avgOffPassDist;
-
-	var frequency = {};
-	var max = 0;
-	var result;
-	var maxReceivers = [];
-	for (var v in receivers) {
-		frequency[receivers[v]]=(frequency[receivers[v]] || 0)+1;
-		if (frequency[receivers[v]] > max) {
-			max = frequency[receivers[v]];
-		}
-	}
-	for (var v in frequency) {
-		if (frequency[v] === max) {
-			maxReceivers.push(v);
-		}
-	}
-	var maxReceiversString = "";
-	for (var v = 0; v < maxReceivers.length-1; v++) {
-		maxReceiversString += maxReceivers[v];
-		maxReceiversString += ", "
-	}
-	maxReceiversString += maxReceivers[maxReceivers.length-1];
-	maxReceiversString += (" (" + max + ")");
-
 	document.getElementById('receiver').innerHTML=maxReceiversString;
 }
 
 function filterByDown(value, playValue, gameValue) {
-	var game;
-	if (gameValue == "Virginia")
-		game = virginia;
-	else if (gameValue == "Arizona")
-		game = arizona;
+	var game = setGameVariable(gameValue);
 
 	var completePasses = 0;
 	var totalPasses = 0;
@@ -505,13 +428,7 @@ function filterByDown(value, playValue, gameValue) {
 			}
 		}
 	} else {
-		playName = "";
-		if (playValue == "playType1")
-			playName = "Pass";
-		else if (playValue == "playType2")
-			playName = "PA Pass";
-		else 
-			playName = "Screen pass";
+		var playName = setPlayName(playValue);
 
 		for (var i = 0; i < game.length; i++) {
 			var pass = game[i];
@@ -565,6 +482,7 @@ function filterByDown(value, playValue, gameValue) {
 	var pDistance = Math.round(truePassDistance/totalPasses);
 	var avgTPassDistance = Math.round(passDistance/totalPasses);
 	var avgOffPassDist = Math.round(offPassDis/totalPasses);
+	var maxReceiversString = returnMaxReceiverString(receivers);
 
 	document.getElementById('completePasses').innerHTML=passPercentage+'%';
 	document.getElementById('totalPasses').innerHTML=totalPasses;
@@ -575,34 +493,37 @@ function filterByDown(value, playValue, gameValue) {
 	document.getElementById('pythDistance').innerHTML=pDistance;
 	document.getElementById('tpDistance').innerHTML=avgTPassDistance;
 	document.getElementById('offPassDistance').innerHTML=avgOffPassDist;
+	document.getElementById('receiver').innerHTML=maxReceiversString;
+}
 
+function returnMaxReceiverString(param) {
 	var frequency = {};
 	var max = 0;
 	var result;
 	var maxReceivers = [];
-	for (var v in receivers) {
-		frequency[receivers[v]]=(frequency[receivers[v]] || 0)+1;
-		if (frequency[receivers[v]] > max) {
-			max = frequency[receivers[v]];
+	var maxReceiversString = "";
+
+	for (var v in param) {
+		frequency[param[v]]=(frequency[param[v]] || 0)+1;
+		if (frequency[param[v]] > max) {
+			max = frequency[param[v]];
 		}
 	}
+
 	for (var v in frequency) {
 		if (frequency[v] === max) {
 			maxReceivers.push(v);
 		}
 	}
-	var maxReceiversString = "";
+	
 	for (var v = 0; v < maxReceivers.length-1; v++) {
 		maxReceiversString += maxReceivers[v];
 		maxReceiversString += ", "
 	}
 	maxReceiversString += maxReceivers[maxReceivers.length-1];
 	maxReceiversString += (" (" + max + ")");
-
-	document.getElementById('receiver').innerHTML=maxReceiversString;
+	return maxReceiversString;
 }
-
-
 
 
 
