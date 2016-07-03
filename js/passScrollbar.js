@@ -197,6 +197,7 @@ $(document).ready(function() {
 		establishedConnections = true;
 		drawConnections();
 
+		jsPlumb.setContainer("field");
 		$(window).resize(function() {
 			if(establishedConnections)
 				jsPlumb.repaintEverything();
