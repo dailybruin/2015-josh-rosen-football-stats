@@ -140,7 +140,10 @@ function filterStatsBox() {
 	if (filtersQuarter) { // filter by quarter 
 		if (filterByPlay) {
 			console.log("Filter by Quarter + Play");
-			filterByQuarter(qDSelectedVal, qPSelectedId, gSelectedFilter);
+			if (qDSelectedVal == 'all')
+				filterByPlayAlone(qPSelectedId, gSelectedFilter);
+			else 
+				filterByQuarter(qDSelectedVal, qPSelectedId, gSelectedFilter);
 		} else {
 			console.log("Filter by Quarter");
 			filterByQuarter(qDSelectedVal, null, gSelectedFilter);
@@ -296,7 +299,13 @@ function filterByQuarter(value, playValue, gameValue) {
 	var standardPass = 0;
 	var offPassDis = 0; 
 
-	if (playValue == null) {
+	if (playValue == null && value == 'all') {
+		console.log("Hello");
+		initializeGame(gameValue);
+		return;
+	}
+	else if (playValue == null && value !== 'all') {
+		console.log("Bye");
 		for (var i = 0; i < game.length; i++) {
 			var pass = game[i];
 			if (pass['Qtr.'] == value) {
